@@ -1,1 +1,1 @@
-"Hello World! From, Powershell \n"
+"Hello World!"
