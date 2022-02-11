@@ -3,7 +3,8 @@ name: Workflow 1 - Print Hello World            # <- Optional workflow name.
 on:                                             # <- The trigger definition block.
   push:                                         # <- An event to trigger the action, of type push.
     branches:                                   # <- Target Branches.
-      - trigger-action                          # <- Selecting an empty test branch
+      - main                                    # <- TODO: remove
+      - trigger-action                          # <- Adding an empty test branch
 
 jobs:                                           # <- The execution of work block.
   Job-Identifier:                               # <- Required Job ID. Contains related action steps.
