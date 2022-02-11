@@ -16,4 +16,4 @@ jobs:
       - uses: actions/checkout@v2               
       - name: Printing Environment Variables
         shell: pwsh
-        run: ./Scripts/GithubEnvVariables.ps1
+        run: ./Powershell/GithubEnvVariables.ps1
