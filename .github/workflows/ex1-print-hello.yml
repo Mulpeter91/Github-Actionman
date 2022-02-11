@@ -14,5 +14,5 @@ jobs:                                           # <- The execution of work block
       - uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.
       - id: First Step                          # <- Optional step ID.
       - name: Executing HelloWorld Script       # <- Optional step name.
-      - shell: pwsh                             # <- Shell specifies a command language. In this case it is pwsh but could be bash also.
+        shell: pwsh                             # <- Shell specifies a command language. In this case it is pwsh but could be bash also.
         run: ./HelloWorld.ps1                   # <- Run keyword executes a command. In this case a powershell script.
