@@ -2,18 +2,18 @@ name: Workflow 1 - Print Hello World            # <- Optional workflow name.
 
 on:                                             # <- The trigger definition block.
   push:                                         # <- An event to trigger the action, of type push.
-    branches:                                   # <- Target Branches.
-      - main                                    # <- TODO: remove
-      - trigger-action                          # <- Adding an empty test branch
+    branches: [                                 # <- Target Branches. Accepts an array.
+      main,                                     # <- TODO: remove
+      trigger-action                            # <- Adding an empty test branch
+    ] 
 
 jobs:                                           # <- The execution of work block.
   Job-Identifier:                               # <- Required Job ID. Contains related action steps.
     name: Executing Hello World Script          # <- Optional Job Name.
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest                      # <- Tells the server which OS to run on. Can also be windows, macOS, or even self-hosted.
     
     steps:                                      # <- Step definitions.
       - uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.
       - name: Executing HelloWorld Script       # <- Optional step name.
         shell: pwsh                             # <- Shell specifies a command language. In this case it is pwsh but could be bash also.
         run: ./Scripts/HelloWorld.ps1           # <- Run keyword executes a command. In this case a powershell script.
-        

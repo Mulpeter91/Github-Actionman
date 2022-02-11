@@ -30,7 +30,11 @@ The setup of actions is incredibly easy and much more simple relative to competi
 
 One of the ways this is made easy is that actions can come with integration with the dependant technologies you need
 
+# Hosting
 
+Github actions are executed on github servers, but you can host your own if you choose. It is important to note that jobs listed
+within a workflow are run on different github servers. By default the jobs in a workflow run in parallel but in the event you
+want them to wait you can use the 'needs' keyword in dependent jobs
 
 # Powershell
 
@@ -42,4 +46,5 @@ You are also not limited to using only the official github actions repo. Include
 set up with a predefined action repo (includes an action.yaml in the root). Examples include Google's own actions: https://github.com/google-github-actions
 
 
-
+https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+https://github.com/google-github-actions
