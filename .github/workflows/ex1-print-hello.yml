@@ -2,8 +2,9 @@ name: Print Hello World                         # <- Optional workflow name.
 
 on:                                             # <- The trigger definition block.
   push:                                         # <- An event to trigger the action, of type push.
-    branches:                                   
-      - main                                    # <- Target Branches.
+    branches:                                   # <- Target Branches.                         
+      - main
+      - trigger-action
 
 jobs:                                           # <- The execution of work block.
   Job-Identifier:                               # <- Required Job ID. Contains related action steps.
