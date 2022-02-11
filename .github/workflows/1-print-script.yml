@@ -1,4 +1,4 @@
-name: Print Hello World                         # <- Optional workflow name.
+name: Workflow 1 - Print Hello World            # <- Optional workflow name.
 
 on:                                             # <- The trigger definition block.
   push:                                         # <- An event to trigger the action, of type push.
