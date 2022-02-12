@@ -1,6 +1,6 @@
 name: Read Env Variables from file
 description: Reads environment variables from a passed .env file.
-author: Robert Mulpeter
+author: @Mulpeter91
 
 inputs:
   filePath:
@@ -11,7 +11,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: |
-        Write-Host "Reached"
-        Write-Open ${{ inputs.filePath }} >> $GITHUB_ENV
+    - run: Get-Content ${{ inputs.filePath }} >> $GITHUB_ENV
       shell: pwsh

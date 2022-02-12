@@ -1,6 +1,6 @@
 name: Print Parameters
 description: Prints a message passed from the workflow.
-author: Robert Mulpeter
+author: @Mulpeter91
 
 inputs:
   message:

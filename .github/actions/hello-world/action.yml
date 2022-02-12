@@ -1,6 +1,6 @@
 name: Print Hello World
 description: Prints a Hello World message.
-author: Robert Mulpeter
+author: @Mulpeter91
 
 runs:
   using: "composite"
