@@ -21,14 +21,14 @@ jobs:
           message: "Cobra Kai never dies"                         # <- Named parameter in the called action.
           
       #Example 4.2
-      - name: Obtain variables from environment file
+      - name: Set variables from environment file
         uses: ./.github/actions/read-env-file
         with:
           filePath: ./.github/variables/variables.env
 
       #Example 4.3
       - id: example4-3
-        name: Obtain variables from powershell file
+        name: Set variables from powershell file
         run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
         
       - name: Inspect Environment Variables
