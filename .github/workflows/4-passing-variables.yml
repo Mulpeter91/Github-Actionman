@@ -14,7 +14,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: Use hello world composite action
+      - name: Use print message composite action
         uses: ./.github/actions/print-message
         with:
           message: "Cobra Kai never dies."

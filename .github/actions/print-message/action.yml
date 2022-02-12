@@ -14,5 +14,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: Write-Output ${{ inputs.message }}
+    - run: Write-Output -NoNewline ${{ inputs.message }} ${{ inputs.version }}
       shell: pwsh
