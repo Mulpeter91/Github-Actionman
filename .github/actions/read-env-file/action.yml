@@ -12,6 +12,6 @@ runs:
   using: "composite"
   steps:
     - run: |
-        Get-Content ${{ inputs.filePath }} >> $GITHUB_ENV
-        Write-Host $env:DOJO
+        Get-Content ${{ inputs.filePath }} >> $Env:GITHUB_ENV
+        echo $env:DOJO
       shell: pwsh
