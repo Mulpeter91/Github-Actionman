@@ -13,5 +13,4 @@ runs:
   steps:
     - run: |
         Get-Content ${{ inputs.filePath }} >> $Env:GITHUB_ENV
-        echo $Env:DOJO
       shell: pwsh

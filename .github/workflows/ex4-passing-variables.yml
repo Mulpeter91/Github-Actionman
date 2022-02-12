@@ -12,15 +12,7 @@ jobs:
     name: Print message from another action
     runs-on: windows-latest
     
-    steps:
-      - name: Set variable in run command
-        run: |
-          export DOJO=Eagle Fang Karake
-          echo "::set-env name=DOJO::$FOO"
-      
-      - name: Print the previous variable
-        run: echo $DOJO
-      
+    steps:      
       - uses: actions/checkout@v2
       - name: Use print message composite action
         uses: ./.github/actions/print-message
@@ -31,3 +23,6 @@ jobs:
         uses: ./.github/actions/read-env-file
         with:
           filePath: ./.github/variables/variables.env
+        
+      - name: Inspect Environment Variables
+        run: env
