@@ -1,4 +1,4 @@
-name: Workflow 3 - Calling a Composite Action
+name: Workflow 3 - Running a local Composite Action
 
 on:
   push:
@@ -8,10 +8,11 @@ on:
     ]
 
 jobs:
-  Job-Identifier-Sample:
+  Run-Composite-Action:
     name: Print message from another action
     runs-on: windows-latest
     
     steps:
-      - name: Print from action
-        uses: ./actions/action.yml
+      - uses: action/checkout@v2
+      - name: Use hello world composite action
+        uses: ./.github/actions/HelloWorld

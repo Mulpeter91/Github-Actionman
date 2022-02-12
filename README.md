@@ -68,6 +68,10 @@ run: notice that $BEST_COCKTAIL is not listed, while the other two are. This is 
 
 # Example 3 - Composite Actions
 
-This file 'action.yml' is only required for an action if you plan to list it in the GitHub Marketplace.
+Each custom action requires its own directory and action.yml to define it.
+https://dev.to/jameswallis/using-github-composite-actions-to-make-your-workflows-smaller-and-more-reusable-476l
+https://arinco.com.au/blog/github-actions-share-environment-variables-across-workflows/
 
 # Example 4 - Passing Variables
+
+https://www.jamescroft.co.uk/setting-github-actions-environment-variables-in-powershell/
