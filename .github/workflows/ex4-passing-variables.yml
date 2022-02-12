@@ -42,4 +42,5 @@ jobs:
       #Example 4.4
       - name: Print variables from previous job
         run: echo ${env:DOJO_1}
+        shell: pwsh
       
