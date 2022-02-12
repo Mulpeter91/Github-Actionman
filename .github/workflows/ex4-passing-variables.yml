@@ -11,6 +11,8 @@ jobs:
   Create-Variables:
     name: Creating and passing variables
     runs-on: windows-latest
+    outputs: 
+      output1: ${{ steps.example4-3.outputs.DOJO_1 }}
     
     steps:
       #Example 4.1
@@ -27,7 +29,8 @@ jobs:
           filePath: ./.github/variables/variables.env
 
       #Example 4.3
-      - name: Obtain variables from powershell file
+      - id: example4-3
+        name: Obtain variables from powershell file
         run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
         
       - name: Inspect Environment Variables
@@ -41,7 +44,7 @@ jobs:
     steps:
       #Example 4.4
       - name: Print variables from previous job
-        run: echo "${{ env.DOJO_1 }}"
+        run: echo ${{needs.Create-Variables.outputs.output1}}
 
       - name: Inspect Environment Variables
         run: env
