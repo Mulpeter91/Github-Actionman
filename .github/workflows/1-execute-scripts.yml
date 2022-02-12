@@ -4,7 +4,7 @@ on:                                             # <- The trigger definition bloc
   push:                                         # <- An event to trigger the action, of type push.
     branches: [                                 # <- Target Branches. Accepts an array.
       main,
-      trigger-action                            # <- Adding an empty test branch.
+      another-branch
     ]
 
 jobs:                                           # <- The execution of work block.

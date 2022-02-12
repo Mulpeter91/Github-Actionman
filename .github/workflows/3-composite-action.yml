@@ -4,7 +4,7 @@ on:
   push:
     branches: [
         main,
-        trigger-action
+        another-branch
     ]
 
 jobs:
@@ -13,6 +13,6 @@ jobs:
     runs-on: windows-latest
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2                 # <- Required to checkout your code in order to access composite actions from with the repo
       - name: Use hello world composite action
-        uses: ./.github/actions/hello-world
+        uses: ./.github/actions/hello-world       # <- Use keyword for calling other actions

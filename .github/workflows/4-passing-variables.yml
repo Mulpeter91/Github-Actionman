@@ -4,7 +4,7 @@ on:
   push:
     branches: [
         main,
-        trigger-action
+        another-branch
     ]
 
 jobs:
@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Use print message composite action
         uses: ./.github/actions/print-message
-        with:
-          message: "Cobra Kai never dies"
+        with:                                              # <- With keyword to signify parameters
+          message: "Cobra Kai never dies"                  # <- Named parameter in the called action.
           
       - name: Obtain Environment Variables from file
         uses: ./.github/actions/read-env-file
