@@ -24,3 +24,7 @@ jobs:                                           # <- The execution of work block
       - name: Printing ZShell
         shell: sh
         run: ./Zshell/HelloWorld.zsh
+
+      - name: Printing Python
+        shell: python
+        run: ./Python/HelloWorld.py
