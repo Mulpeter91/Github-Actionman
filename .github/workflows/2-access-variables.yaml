@@ -9,22 +9,21 @@ on:
     
 env:
   BEST_PINT: Guinness                             # <- Custom Env variables are set within the workflow file.
-                                                  # <- Scoped to everything within the workflow.
+                                                  # <- High order variables are scoped to everything within the workflow.
 
 jobs:
   Job-Identifier-Sample:
     name: Printing Github Environment Variables
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       BEST_WHISKEY: Midleton                      # <- Scoped to this job and subsequent steps.         
     
     steps:  
       - uses: actions/checkout@v2               
       - name: Print Variables to Script
-        shell: pwsh
         run: ./Powershell/GithubEnvVariables.ps1
         env:
           BEST_COCKTAIL: Whiskey Sour              # <- Scoped to this step only.
           
       - name: Inspect Environment Variables
-        run: env                                   # <- Prints to the output the set of available environment variables to this step. 
+        run: env                                   # <- Prints to output the available variables to this step. 
