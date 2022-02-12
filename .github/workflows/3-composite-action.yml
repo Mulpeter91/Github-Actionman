@@ -1,4 +1,4 @@
-name: Workflow 3 - Calling an external action file
+name: Workflow 3 - Calling a Composite Action
 
 on:
   push:
@@ -14,4 +14,4 @@ jobs:
     
     steps:
       - name: Print from action
-        uses: ./.github/actions/action@main
+        uses: ./.github/actions/action@v1
