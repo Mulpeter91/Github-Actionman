@@ -27,4 +27,4 @@ jobs:
           BEST_COCKTAIL: Whiskey Sour              # <- Scoped to this step only.
 
       - name: Inspect Environment Variables
-        run: env
+        run: env                                   # <- Prints to the output the set of available environment variables.
