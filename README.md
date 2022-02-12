@@ -68,4 +68,6 @@ run: notice that $BEST_COCKTAIL is not listed, while the other two are. This is 
 
 # Example 3 - Composite Actions
 
+This file 'action.yml' is only required for an action if you plan to list it in the GitHub Marketplace.
+
 # Example 4 - Passing Variables
