@@ -5,5 +5,5 @@ author: Robert Mulpeter
 runs:
   using: "composite"
   steps:
-    - run: Write-Output "Hello World from Composite Action!"
+    - run: "Hello World from Composite Action!"
       shell: pwsh
