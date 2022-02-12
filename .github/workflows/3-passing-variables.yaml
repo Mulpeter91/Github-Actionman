@@ -17,4 +17,6 @@ jobs:
         uses: ./.github/actions/obtainVariables
         with:
           varFilePath: ./.github/variables/Variables.env
+          
+      - name: Inspect Environment Variables
         run: env
