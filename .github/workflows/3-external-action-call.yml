@@ -14,4 +14,4 @@ jobs:
     
     steps:
       - name: Print from action
-        uses: ./.github/actions/action
+        uses: ./.github/actions/action@main
