@@ -12,5 +12,5 @@ runs:
   using: "composite"
   steps:
     - run: |
-        Get-Content ${{ inputs.filePath }} >> $Env:GITHUB_ENV
+        Get-Content ${{ inputs.filePath }} >> $Env:GITHUB_ENV   # <- Adding directly $Env:GITHUB_ENV saves at the workflow level
       shell: pwsh

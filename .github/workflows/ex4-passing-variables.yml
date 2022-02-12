@@ -25,7 +25,7 @@ jobs:
           filePath: ./.github/variables/variables.env
 
       - name: Obtain variables from powershell file
-        run: Get-Content ./Powershell/variables.ps1 >> $Env:GITHUB_ENV   
+        run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
         
       - name: Inspect Environment Variables
         run: env
