@@ -15,5 +15,4 @@ jobs:                                           # <- The execution of work block
     steps:                                      # <- Step definitions.
       - uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.
       - name: Printing Hello World              # <- Optional step name.
-        shell: pwsh                             # <- Shell specifies a command language. In this case it is PowerShell Core, which defaults to UTF-8.
         run: ./Powershell/HelloWorld.ps1        # <- Run keyword executes a command. In this case a powershell script.
