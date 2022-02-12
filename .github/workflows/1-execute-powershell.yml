@@ -6,22 +6,14 @@ on:                                             # <- The trigger definition bloc
       main,
       trigger-action                            # <- Adding an empty test branch.
     ]
-    
-env:
-  BEST_PINT: Guinness                           # <- Custom Env variables are set within the workflow file.
-                                                # <- Scoped to everything within the workflow.
 
 jobs:                                           # <- The execution of work block.
   Job-Identifier:                               # <- Required Job ID. Contains related action steps.
     name: Executing Hello World Script          # <- Optional Job Name.
-    runs-on: ubuntu-latest                      # <- Tells the server which OS to run on. Can also be windows, macOS, or even self-hosted.
-    env:
-      BEST_WHISKEY: Midleton                    # <- Scoped to this job and subsequent steps.               
+    runs-on: ubuntu-latest                      # <- Tells the server which OS to run on. Can also be windows, macOS, or even self-hosted.      
     
     steps:                                      # <- Step definitions.
       - uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.
       - name: Printing Hello World              # <- Optional step name.
         shell: pwsh                             # <- Shell specifies a command language. In this case it is pwsh but could be bash also.
         run: ./Powershell/HelloWorld.ps1        # <- Run keyword executes a command. In this case a powershell script.
-        env:
-          BEST_COCKTAIL: Whisky Sour            # <- Scoped to this step only.

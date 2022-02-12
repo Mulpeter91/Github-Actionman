@@ -6,14 +6,22 @@ on:
         main,
         trigger-action
     ]
+    
+env:
+  BEST_PINT: Guinness                             # <- Custom Env variables are set within the workflow file.
+                                                  # <- Scoped to everything within the workflow.
 
 jobs:
   Job-Identifier-Sample:
     name: Printing Github Environment Variables
     runs-on: ubuntu-latest
+    env:
+      BEST_WHISKEY: Midleton                      # <- Scoped to this job and subsequent steps.         
     
     steps:
       - uses: actions/checkout@v2               
       - name: Printing Environment Variables
         shell: pwsh
         run: ./Powershell/GithubEnvVariables.ps1
+        env:
+          BEST_COCKTAIL: Whisky Sour              # <- Scoped to this step only.
