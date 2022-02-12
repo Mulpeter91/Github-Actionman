@@ -1,0 +1,18 @@
+name: Print Message
+description: Prints a message passed from the workflow.
+author: Robert Mulpeter
+
+inputs:
+  message:
+    required: true
+    description: "The message to be printed"
+  version:
+    required: false
+    description: "The version of something that does not exist."
+    default: "<NO VERSION INFORMATION>"
+    
+runs:
+  using: "composite"
+  steps:
+    - run: Write-Output ${{ inputs.message }}
+      shell: pwsh

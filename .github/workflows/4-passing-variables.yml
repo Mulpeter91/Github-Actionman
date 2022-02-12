@@ -8,15 +8,13 @@ on:
     ]
 
 jobs:
-  Job-Identifier-Sample:
-    name: Obtaining variables from .env file
-    runs-on: windows-latest  
+  Run-Composite-Action:
+    name: Print message from another action
+    runs-on: windows-latest
     
     steps:
-      - name: Print Variables from .env file
-        uses: ./.github/actions/obtainVariables@main
+      - uses: actions/checkout@v2
+      - name: Use hello world composite action
+        uses: ./.github/actions/print-message
         with:
-          varFilePath: ./.github/variables/Variables.env
-          
-      - name: Inspect Environment Variables
-        run: env
+          message: "Cobra Kai never dies."
