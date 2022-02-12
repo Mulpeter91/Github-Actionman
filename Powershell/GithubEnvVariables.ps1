@@ -15,5 +15,3 @@
 
 "The name of the runner executing the job."
 "RUNNER_NAME: '$Env:RUNNER_NAME'`n"
-
-"After all this work I love a ${{ $secrets.BEST_PINT }}"
