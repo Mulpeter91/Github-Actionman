@@ -12,6 +12,6 @@ runs:
   using: "composite"
   steps:
     - run: |
-        Get-Content ${{ inputs.filePath }} >> $Env:GITHUB_ENV
-        echo $env:DOJO
+        echo ${{ inputs.filePath }} >> $Env:GITHUB_ENV
+        echo $Env:DOJO
       shell: pwsh
