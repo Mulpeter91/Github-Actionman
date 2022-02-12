@@ -1,4 +1,4 @@
-name: Workflow 1 - Run Hello Worlds scripts     # <- Optional workflow name.
+name: 1 - Run Hello Worlds scripts     # <- Optional workflow name.
 
 on:                                             # <- The trigger definition block.
   push:                                         # <- An event to trigger the action, of type push.

@@ -1,4 +1,4 @@
-name: Workflow 2 - Access Github Environment Variables
+name: 2 - Access Github Environment Variables
 
 on:
   push:

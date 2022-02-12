@@ -1,4 +1,4 @@
-name: Workflow 3 - Running a local Composite Action
+name: 3 - Running a local Composite Action
 
 on:
   push:

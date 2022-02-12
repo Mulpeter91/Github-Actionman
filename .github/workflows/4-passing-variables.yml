@@ -1,4 +1,4 @@
-name: Workflow 4 - Passing Variables
+name: 4 - Passing Variables
 
 on:
   push:
