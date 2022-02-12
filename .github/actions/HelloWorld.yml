@@ -1,0 +1,7 @@
+name: Print Hello World
+description: Prints a Hello World message.
+runs:
+  using: "composite"
+  steps:
+    - run: Write-Output "Hello World from Action!"
+      shell: pwsh

@@ -1,0 +1,17 @@
+name: Workflow 3 - Calling an external action file
+
+on:
+  push:
+    branches: [
+        main,
+        trigger-action
+    ]
+
+jobs:
+  Job-Identifier-Sample:
+    name: Print message from another action
+    runs-on: windows-latest
+    
+    steps:
+      - name: Print from action
+        uses: ./.github/actions/HelloWorld.yaml
