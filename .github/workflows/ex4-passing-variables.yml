@@ -16,13 +16,16 @@ jobs:
       - uses: actions/checkout@v2
       - name: Use print message composite action
         uses: ./.github/actions/print-message
-        with:                                              # <- With keyword to signify parameters
-          message: "Cobra Kai never dies"                  # <- Named parameter in the called action.
+        with:                                                     # <- With keyword to signify parameters
+          message: "Cobra Kai never dies"                         # <- Named parameter in the called action.
           
-      - name: Obtain Environment Variables from file
+      - name: Obtain variables from environment file
         uses: ./.github/actions/read-env-file
         with:
           filePath: ./.github/variables/variables.env
+
+      - name: Obtain variables from powershell file
+        run: Get-Content ./Powershell/variables.ps1 >> $Env:GITHUB_ENV   
         
       - name: Inspect Environment Variables
         run: env
