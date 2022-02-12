@@ -27,4 +27,4 @@ jobs:                                           # <- The execution of work block
 
       - name: Printing Python
         shell: python
-        run: HelloWorld.py
+        run: python HelloWorld.py
