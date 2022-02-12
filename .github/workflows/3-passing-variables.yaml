@@ -1,0 +1,26 @@
+name: Workflow 3 - Passing Variables
+
+on:
+  push:
+    branches: [
+        main,
+        trigger-action
+    ]
+
+env:
+  BEST_PINT: Guinness
+
+jobs:
+  Job-Identifier-Sample:
+    name: Printing Github Environment Variables
+    runs-on: ubuntu-latest
+    env:
+      BEST_WHISKEY: Midleton   
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Printing Environment Variables
+        shell: pwsh
+        run: ./Powershell/PassingVariables.ps1
+        env:
+          BEST_COCKTAIL: Whiskey Sour
