@@ -14,7 +14,7 @@ jobs:
     
     steps:
       - name: Print Variables from .env file
-        uses: ./.github/actions/obtainVariables
+        uses: ./.github/actions/obtainVariables@main
         with:
           varFilePath: ./.github/variables/Variables.env
           
