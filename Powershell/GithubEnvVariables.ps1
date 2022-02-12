@@ -16,4 +16,4 @@
 "The name of the runner executing the job."
 "RUNNER_NAME: '$Env:RUNNER_NAME'`n"
 
-$Env:BEST_PINT
+"I love a pint of $Env:BEST_PINT with a glass of $Env:BEST_WHISKEY and end the night on a $BEST_COCKTAIL."
