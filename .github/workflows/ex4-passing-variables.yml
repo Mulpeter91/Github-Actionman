@@ -13,6 +13,14 @@ jobs:
     runs-on: windows-latest
     
     steps:
+      - name: Set variable in run command
+        run: |
+          export DOJO=Eagle Fang Karake
+          echo "::set-env name=DOJO::$FOO"
+      
+      - name: Print the previous variable
+        run: echo $DOJO
+      
       - uses: actions/checkout@v2
       - name: Use print message composite action
         uses: ./.github/actions/print-message

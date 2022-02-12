@@ -76,3 +76,5 @@ https://github.com/lowlighter/metrics/discussions/448
 # Example 4 - Passing Variables
 
 https://www.jamescroft.co.uk/setting-github-actions-environment-variables-in-powershell/
+
+https://www.edwardthomson.com/blog/github_actions_15_sharing_data_between_steps.html
