@@ -58,3 +58,6 @@ The contents of a job within a workflow, by using jobs.<job_id>.env.
 A specific step within a job, by using jobs.<job_id>.steps[*].env.
 
 https://docs.github.com/en/actions/learn-github-actions/environment-variables
+
+Because environment variable interpolation is done after a workflow job is sent to a runner machine, you must use the appropriate syntax for the shell that's used on the runner. In this example, the workflow specifies ubuntu-latest. By default, Linux runners use the bash shell, so you must use the syntax $NAME. If the workflow specified a Windows runner, you would use the syntax for PowerShell, $env:NAME.
+But since we're specifying powershell core we use $env:Name

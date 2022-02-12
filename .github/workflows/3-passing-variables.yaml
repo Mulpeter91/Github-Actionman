@@ -24,3 +24,6 @@ jobs:
         run: ./Powershell/PassingVariables.ps1
         env:
           BEST_COCKTAIL: Whiskey Sour
+          
+      - name: Inspect Environment Variables
+        run: env
