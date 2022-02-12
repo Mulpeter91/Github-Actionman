@@ -14,10 +14,13 @@ jobs:                                           # <- The execution of work block
     
     steps:                                      # <- Step definitions.
       - uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.
-      - name: Printing Powershell               # <- Optional step name.
-        shell: pwsh                             # <- Shell overrides the default language of your specified server. In this case it is PowerShell Core, which defaults to UTF-8.
+      - name: Printing Powershell               # <- Optional step name.                        
         run: ./Powershell/HelloWorld.ps1        # <- Run keyword executes a command. In this case a powershell script.
         
       - name: Printing Bash
-        shell: bash                             # <- Shell specifies a command language. In this case it is PowerShell Core, which defaults to UTF-8.
+        shell: bash                             # <- Overrides the default shell language of your specified server. 
+        run: ./Bash/HelloWorld.sh
+        
+      - name: Printing ZShell
+        shell: zsh
         run: ./Bash/HelloWorld.sh

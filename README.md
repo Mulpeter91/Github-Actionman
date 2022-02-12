@@ -49,6 +49,8 @@ set up with a predefined action repo (includes an action.yaml in the root). Exam
 https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 https://github.com/google-github-actions
 
+pwsh In this case it is PowerShell Core, which defaults to UTF-8.
+
 # Example 2 - Environment Variables
 
 To set a custom environment variable, you must define it in the workflow file. The scope of a custom environment variable is limited to the element in which it is defined. You can define environment variables that are scoped for:
