@@ -8,8 +8,8 @@ on:
     ]
 
 jobs:
-  Run-Composite-Action:
-    name: Print message from another action
+  Create-Variables:
+    name: Creating and passing variables
     runs-on: windows-latest
     
     steps:
@@ -32,3 +32,13 @@ jobs:
         
       - name: Inspect Environment Variables
         run: env
+        
+  Obtain-Variables:
+    needs: [Create-Variables]                                      # <- Jobs run parallel by default. The 'needs' keyword sets dependant jobs
+    name: Reading some variables
+    runs-on: windows-latest
+    
+    steps:
+      - name: Print variables from previous job
+        run: Write-Host "Johnny Lawrence joined $Env:DOJO_3 and founded $Env:DOJO_2 to beat $Env:DOJO_1"
+      
