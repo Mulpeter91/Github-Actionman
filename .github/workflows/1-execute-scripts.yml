@@ -22,5 +22,5 @@ jobs:                                           # <- The execution of work block
         run: ./Bash/HelloWorld.sh
         
       - name: Printing ZShell
-        shell: zsh
+        shell: sh
         run: ./Zshell/HelloWorld.zsh

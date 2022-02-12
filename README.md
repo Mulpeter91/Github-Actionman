@@ -36,8 +36,8 @@ Github actions are executed on github servers, but you can host your own if you 
 within a workflow are run on different github servers. By default the jobs in a workflow run in parallel but in the event you
 want them to wait you can use the 'needs' keyword in dependent jobs
 
-# Powershell
-
+# Shells
+https://dev.to/pwd9000/github-actions-all-the-shells-581h
 
 # Example 1 - Hello World
 
