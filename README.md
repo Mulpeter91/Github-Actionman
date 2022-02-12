@@ -65,3 +65,7 @@ Because environment variable interpolation is done after a workflow job is sent 
 But since we're specifying powershell core we use $env:Name
 
 run: notice that $BEST_COCKTAIL is not listed, while the other two are. This is because $BEST_COCKTAIL is bounded to that step.
+
+# Example 3 - Composite Actions
+
+# Example 4 - Passing Variables

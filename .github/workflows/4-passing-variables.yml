@@ -1,4 +1,4 @@
-name: Workflow 3 - External Actions and Variables
+name: Workflow 4 - Passing Variables
 
 on:
   push:

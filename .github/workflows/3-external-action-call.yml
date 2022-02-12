@@ -14,4 +14,4 @@ jobs:
     
     steps:
       - name: Print from action
-        uses: ./.github/actions/HelloWorld.yaml
+        uses: ./.github/actions/HelloWorld.yml
