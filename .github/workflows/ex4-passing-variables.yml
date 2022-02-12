@@ -11,8 +11,6 @@ jobs:
   Create-Variables:
     name: Creating and passing variables
     runs-on: windows-latest
-    outputs: 
-      output1: ${{ steps.example4-3.outputs.DOJO_1 }}
     
     steps:
       #Example 4.1
@@ -42,10 +40,6 @@ jobs:
     runs-on: windows-latest    
     
     steps:
-      #Example 4.4
-      - name: Print variables from previous job
-        run: echo ${{needs.Create-Variables.outputs.output1}}
-
       - name: Inspect Environment Variables
         run: env
       
