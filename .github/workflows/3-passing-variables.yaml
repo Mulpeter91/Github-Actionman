@@ -1,4 +1,4 @@
-name: Workflow 2 - Access Github Environment Variables
+name: Workflow 3 - External Actions and Variables
 
 on:
   push:
@@ -7,27 +7,14 @@ on:
         trigger-action
     ]
 
-env:
-  BEST_PINT: Guinness
-
 jobs:
   Job-Identifier-Sample:
-    name: Printing Github Environment Variables
-    runs-on: windows-latest
-    env:
-      BEST_WHISKEY: Midleton    
+    name: Obtaining variables from .env file
+    runs-on: windows-latest  
     
     steps:
-      - uses: actions/checkout@v2
-      - name: Print Variables to Script
-        run: ./Powershell/GithubEnvVariables.ps1
-        env:
-          BEST_COCKTAIL: Whiskey Sour
-
-      - name: Inspect Environment Variables
+      - name: Print Variables from .env file
+        uses: ./.github/actions/obtainVariables
+        with:
+          varFilePath: ./.github/variables/Variables.env
         run: env
-
-      - name: Print Variables to Script
-        run: ./Powershell/GithubEnvVariables.ps1
-        env:
-          BEST_COCKTAIL: Whiskey Sour
