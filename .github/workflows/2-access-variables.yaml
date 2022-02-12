@@ -25,3 +25,6 @@ jobs:
         run: ./Powershell/GithubEnvVariables.ps1
         env:
           BEST_COCKTAIL: Whiskey Sour              # <- Scoped to this step only.
+
+      - name: Inspect Environment Variables
+        run: env
