@@ -13,4 +13,5 @@ runs:
   steps:
     - run: |
         Get-Content ${{ inputs.filePath }} >> $GITHUB_ENV
+        Write-Host ${{ $env:DOJO }}
       shell: pwsh
