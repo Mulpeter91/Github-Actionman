@@ -17,4 +17,4 @@ jobs:
       - name: Use print message composite action
         uses: ./.github/actions/print-message
         with:
-          message: "Cobra Kai never dies."
+          message: "Cobra Kai never dies"

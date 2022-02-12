@@ -9,7 +9,7 @@ inputs:
   version:
     required: false
     description: "The version of something that does not exist."
-    default: "NO VERSION INFORMATION"
+    default: "🤟🏻"
     
 runs:
   using: "composite"
