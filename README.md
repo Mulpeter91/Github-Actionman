@@ -61,3 +61,5 @@ https://docs.github.com/en/actions/learn-github-actions/environment-variables
 
 Because environment variable interpolation is done after a workflow job is sent to a runner machine, you must use the appropriate syntax for the shell that's used on the runner. In this example, the workflow specifies ubuntu-latest. By default, Linux runners use the bash shell, so you must use the syntax $NAME. If the workflow specified a Windows runner, you would use the syntax for PowerShell, $env:NAME.
 But since we're specifying powershell core we use $env:Name
+
+run: notice that $BEST_COCKTAIL is not listed, while the other two are. This is because $BEST_COCKTAIL is bounded to that step.

@@ -10,7 +10,7 @@ on:                                             # <- The trigger definition bloc
 jobs:                                           # <- The execution of work block.
   Job-Identifier:                               # <- Required Job ID. Contains related action steps.
     name: Executing Hello World Script          # <- Optional Job Name.
-    runs-on: ubuntu-latest                      # <- Tells the server which OS to run on. Can also be windows, macOS, or even self-hosted.      
+    runs-on: windows-latest                     # <- Tells the server which OS to run on. Can also be windows, macOS, or even self-hosted.      
     
     steps:                                      # <- Step definitions.
       - uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.

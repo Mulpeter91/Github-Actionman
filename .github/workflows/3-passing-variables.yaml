@@ -1,4 +1,4 @@
-name: Workflow 3 - Passing Variables
+name: Workflow 3 - Passing Around Variables
 
 on:
   push:
@@ -15,13 +15,15 @@ jobs:
     name: Printing Github Environment Variables
     runs-on: ubuntu-latest
     env:
-      BEST_WHISKEY: Midleton   
+      BEST_WHISKEY: Midleton
     
-    steps:        
+    steps:
       - uses: actions/checkout@v2
-      - name: Printing Environment Variables
+      - name: Print Variables to Script
         shell: pwsh
-        run: ./Powershell/PassingVariables.ps1
+        run: ./Powershell/GithubEnvVariables.ps1
         env:
           BEST_COCKTAIL: Whiskey Sour
-          
+
+      - name: Inspect Environment Variables
+        run: env
