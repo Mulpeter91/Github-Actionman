@@ -3,7 +3,7 @@
 This article gives a brief introduction to the concepts and syntax of github actions. While the 
 official documentation of github actions is comprehensive, the aim of this article is to help avoid those early learning mistakes.
 
-##Some Context
+## Some Context
 
 Github actions is a platform to automate developer workflows. It was built to reduce the organisational 
 burden attached to large open-source community driven repositories. This burden would manifest in the form 
@@ -22,7 +22,7 @@ your needs. The examples in this article are simple workflows created merely to 
 3. Calling local composite action
 4. Setting & Passing Variables
 
-##1. Executing Hello World in Shell
+## 1. Executing Hello World in Shell
 
 Github actions are executed on github servers, but you can host your own if you choose. It is important to note that jobs listed
 within a workflow are run on different github servers. By default the jobs in a workflow run in parallel but in the event you
@@ -90,7 +90,7 @@ https://github.com/google-github-actions
 
 pwsh In this case it is PowerShell Core, which defaults to UTF-8.
 
-##2. Accessing Environment Variables
+## 2. Accessing Environment Variables
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```yaml
@@ -173,7 +173,7 @@ But since we're specifying powershell core we use $env:Name
 
 run: notice that $BEST_COCKTAIL is not listed, while the other two are. This is because $BEST_COCKTAIL is bounded to that step.
 
-##3. Calling local Composite Action
+## 3. Calling local Composite Action
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex3-composite-action.yml)
 ```yaml
@@ -220,9 +220,9 @@ Each custom action requires its own directory and action.yml to define it.
 https://arinco.com.au/blog/github-actions-share-environment-variables-across-workflows/
 https://github.com/lowlighter/metrics/discussions/448
 
-##4. Setting & Passing Variables
+## 4. Setting & Passing Variables
 
-###4.1 Passing Parameters to Composite Action
+### 4.1 Passing Parameters to Composite Action
 
 [**Job 1 Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -267,7 +267,7 @@ Run Write-Host Cobra Kai never dies 🤟🏻
 Cobra Kai never dies 🤟🏻
 ```
 
-###4.2 Set Variables from Environment File
+### 4.2 Set Variables from Environment File
 
 [**Job 1 Step 2**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -291,7 +291,7 @@ Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
     DOJO_1: Miyagi-Do Karate
 ```
 
-###4.3 Set Variables from Powershell File
+### 4.3 Set Variables from Powershell File
 
 [**Job 1 Step 3**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -310,7 +310,7 @@ DOJO_3=Cobra-Kai Karate
 Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 ```
 
-###4.4 Pass Variable to Dependant Job (WIP)
+### 4.4 Pass Variable to Dependant Job (WIP)
 
 [**Job 2 Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
