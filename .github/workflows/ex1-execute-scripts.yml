@@ -1,4 +1,4 @@
-name: 1 - Run Hello Worlds scripts     # <- Optional workflow name.
+name: 1 - Run Hello Worlds scripts              # <- Workflow name.
 
 on:                                             # <- The trigger definition block.
   push:                                         # <- An event to trigger the action, of type push.
@@ -8,13 +8,14 @@ on:                                             # <- The trigger definition bloc
     ]
 
 jobs:                                           # <- The execution of work block.
-  Job-Identifier:                               # <- Required Job ID. Contains related action steps.
-    name: Executing Hello World Script          # <- Optional Job Name.
+  Job-Identifier:                               # <- Job ID. Contains related action steps.
+    name: Executing Hello World Script          # <- Job Name.
     runs-on: windows-latest                     # <- Tells the server which OS to run on. Can also be windows, macOS, or even self-hosted.      
     
     steps:                                      # <- Step definitions.
-      - uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.
-      - name: Printing Powershell               # <- Optional step name.                        
+      #- uses: actions/checkout@v2               # <- Use keyword selects an action. Actions/ path in github is where common actions are predefined.
+      
+      - name: Printing Powershell               # <- Optional step name, but advised.                       
         run: ./Powershell/HelloWorld.ps1        # <- Run keyword executes a command. In this case a powershell script.
         
       - name: Printing Bash
