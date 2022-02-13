@@ -34,8 +34,8 @@ Each `job` listed within a workflow is executed concurrently on a different gith
 The significance of this means you need to specify which operating system you want your `job` to run on by using the `run-on` keyword.
 This can include various versions of windows, macOS, ubuntu or even being self-hosted.
 
-If for example all your steps within a job ran powershell commands or scripts, you could `run-on: windows-latest` and call it job done as
-powershell would be understood by that operating system. But let's say you needed to run a one off Zshell script in the same job, here the `shell`
+If for example all your steps within a job run powershell commands or scripts, you could specify `run-on: windows-latest` and call it job done as
+powershell would be understood by the runners of that operating system. But let's say you needed to run a one off Zshell script in the same job, here the `shell`
 keyword can allow you to override the shell of the specified OS by specifying the correct shell language.
 
 Below is an example of 'Hello World' being printed to the console in `powershell`, `bash`, `zshell` and even `python` , which are all being 
