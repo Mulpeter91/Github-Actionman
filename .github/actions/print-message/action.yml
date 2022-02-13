@@ -2,7 +2,7 @@ name: Print Parameters
 description: Prints a message passed from the workflow.
 author: Robert Mulpeter @Mulpeter91
 
-inputs:
+inputs:       # <- keyword for defining action parameters.     
   message:
     required: true
     description: "The message to be printed"

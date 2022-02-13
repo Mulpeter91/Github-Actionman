@@ -3,7 +3,7 @@ description: Prints a Hello World message.
 author: Robert Mulpeter @Mulpeter91
 
 runs:
-  using: "composite"
+  using: "composite"                # <- Required declaration of a composite action.
   steps:
     - run: Write-Host "Hello World from Composite Action!"
       shell: pwsh

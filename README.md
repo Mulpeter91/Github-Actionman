@@ -146,10 +146,8 @@ The name of the runner executing the job.
 RUNNER_NAME: 'GitHub Actions 4'
 
 I love a pint of Guinness with a glass of Midleton and end the night on a Whiskey Sour.
-
-
----------------- Inspect Environment Variables ----------------
-
+```
+```
 ...
 
 APPDATA=C:\Users\runneradmin\AppData\Roaming
@@ -198,6 +196,18 @@ jobs:
       - name: Use hello world composite action
         uses: ./.github/actions/hello-world       # <- Use keyword for calling other actions
 ```
+[**Composite Action**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/actions/hello-world/action.yml)
+```yaml
+name: Print Hello World
+description: Prints a Hello World message.
+author: Robert Mulpeter @Mulpeter91
+
+runs:
+  using: "composite"                # <- Required declaration of a composite action.
+  steps:
+    - run: Write-Host "Hello World from Composite Action!"
+      shell: pwsh
+```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467513?check_suite_focus=true)
 ```
 Run ./.github/actions/hello-world
@@ -214,29 +224,108 @@ https://github.com/lowlighter/metrics/discussions/448
 
 ###4.1 Passing Parameters to Composite Action
 
-```
+[**Job 1 Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+```yaml
+jobs:
+  Create-Variables:
+    name: Creating and passing variables
+    runs-on: windows-latest
 
+    steps:
+      #Example 4.1
+      - uses: actions/checkout@v2
+      - name: Use print message composite action
+        uses: ./.github/actions/print-message
+        with:                                 # <- With keyword to signify parameters
+          message: "Cobra Kai never dies"     # <- Named parameter in the called action.
+```
+[**Composite Action**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/actions/print-message/action.yml)
+```yaml
+name: Print Parameters
+description: Prints a message passed from the workflow.
+author: Robert Mulpeter @Mulpeter91
+
+inputs:       # <- keyword for defining action parameters.     
+  message:
+    required: true
+    description: "The message to be printed"
+  version:
+    required: false
+    description: "The version."
+    default: "🤟🏻"
+
+runs:
+  using: "composite"
+  steps:
+    - run: Write-Host ${{ inputs.message }} ${{ inputs.version }}
+      shell: pwsh
+```
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
+```
+Run ./.github/actions/print-message
+Run Write-Host Cobra Kai never dies 🤟🏻
+Cobra Kai never dies 🤟🏻
 ```
 
 ###4.2 Set Variables from Environment File
 
+[**Job 1 Step 2**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+```yaml
+      #Example 4.2
+      - name: Set variables from environment file
+        uses: ./.github/actions/read-env-file
+        with:
+          filePath: ./.github/variables/variables.env
+```
+[**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/variables/variables.env)
+```
+DOJO_1=Miyagi-Do Karate
 ```
 
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
+```
+Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
+  Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
+  shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+  env:
+    DOJO_1: Miyagi-Do Karate
 ```
 
-###4.3 Set Variables from Environment File
+###4.3 Set Variables from Powershell File
 
+[**Job 1 Step 3**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+```yaml
+     #Example 4.3
+     - name: Set variables from powershell file
+       run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
+```
+[**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/Variables.ps1)
+```
+DOJO_2=Eagle Fang Karate
+DOJO_3=Cobra-Kai Karate
 ```
 
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
+```
+Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 ```
 
-###4.4 Set Variables from Powershell File
+###4.4 Pass Variable to Dependant Job (WIP)
 
+[**Job 2 Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+```yaml
+  Obtain-Variables:
+    needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
+    name: Reading previous variables
+    runs-on: windows-latest
+
+    steps:
+      - name: Inspect Environment Variables
+        run: env
 ```
-
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
 ```
-
-###4.4 Pass Variable to Dependant Job
+```
 
 
 https://www.jamescroft.co.uk/setting-github-actions-environment-variables-in-powershell/

@@ -27,15 +27,14 @@ jobs:
           filePath: ./.github/variables/variables.env
 
       #Example 4.3
-      - id: example4-3
-        name: Set variables from powershell file
+      - name: Set variables from powershell file
         run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
         
       - name: Inspect Environment Variables
         run: env
         
   Obtain-Variables:
-    needs: [Create-Variables]                                      # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
+    needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
     name: Reading previous variables
     runs-on: windows-latest    
     
