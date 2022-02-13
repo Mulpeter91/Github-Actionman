@@ -1,4 +1,4 @@
-![Article Banner]()
+![Article Banner](https://github.com/Mulpeter91/Github-Actionman/blob/main/ReadMeImages/Banner.png)
 
 # Getting Started with Github Action Workflows
 
@@ -161,7 +161,7 @@ RUNNER_NAME: 'GitHub Actions 4'
 
 I love a pint of Guinness with a glass of Midleton and end the night on a Whiskey Sour.
 ```
-A useful command to inspect available environment variables within a step is `run: env`. Notice that the below output does not contain `BEST_COCKTAIL` because it was defind and scoped to the previous step.
+A useful command to inspect available environment variables within a step is `run: env`. Notice that the below output does not contain `BEST_COCKTAIL` because it was defined and scoped to the previous step.
 ```
 ...
 
