@@ -12,10 +12,15 @@ creating release documentation and many other tasks or events.
 
 The purpose of an action is to listen to these events and trigger a workflow in response. For example, if a contributor raises an issue, you
 may want to sort it, label it, and assign it automatically. A workflow is a `.yml` or `.yaml` file with a set of 
-instructions you define. 
+instructions you define.
 
 While CI/CD is often used to convey its utility, it is just one of many possible workflows you can create to serve
 your needs. The examples in this article are simple workflows created merely to introduce some of the basic concepts.
+
+1. Executing hello world in shell
+2. Accessing environment variables
+3. Calling local composite action
+4. Setting & Passing Variables
 
 ##1. Executing Hello World in Shell
 
@@ -23,7 +28,7 @@ Github actions are executed on github servers, but you can host your own if you 
 within a workflow are run on different github servers. By default the jobs in a workflow run in parallel but in the event you
 want them to wait you can use the 'needs' keyword in dependent jobs
 
-
+[**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex1-execute-scripts.yml)
 ```yaml
 name: 1 - Run Hello Worlds scripts              # <- Workflow name.
 
@@ -57,9 +62,19 @@ jobs:                                           # <- The execution of work block
         shell: python
         run: exec(open('./Python/HelloWorld.py').read())
 ```
-**Console output**
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467514?check_suite_focus=true)
 ```
+Run ./Powershell/HelloWorld.ps1
+Hello World from Powershell!
 
+Run ./Bash/HelloWorld.sh
+Hello World from Bash!
+
+Run ./Zshell/HelloWorld.zsh
+hello world from Zshell!
+
+Run exec(open('./Python/HelloWorld.py').read())
+Hello World from Python!
 ```
 
 
@@ -77,6 +92,76 @@ pwsh In this case it is PowerShell Core, which defaults to UTF-8.
 
 ##2. Accessing Environment Variables
 
+[**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
+```yaml
+name: 2 - Access Github Environment Variables
+
+on:
+  push:
+    branches: [
+        main,
+        another-branch
+    ]
+
+env:
+  BEST_PINT: Guinness                             # <- Custom Env variables are set within the workflow file.
+                                                  # <- High order variables are scoped to everything within the workflow.
+
+jobs:
+  Job-Identifier-Sample:
+    name: Printing Github Environment Variables
+    runs-on: windows-latest
+    env:
+      BEST_WHISKEY: Midleton                      # <- Scoped to this job and subsequent steps.         
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Print Variables to Script
+        run: ./Powershell/GithubEnvVariables.ps1
+        env:
+          BEST_COCKTAIL: Whiskey Sour              # <- Scoped to this step only.
+
+      - name: Inspect Environment Variables
+        run: env                                   # <- Prints to output the available variables to this step. 
+```
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467512?check_suite_focus=true)
+```
+The owner and repository name.
+GITHUB_REPOSITORY: 'Mulpeter91/Github-Actionman'
+
+The commit SHA that triggered the workflow.
+GITHUB_SHA: '321d557ec2d724d2c6aaf056b14859ea8468051e'
+
+The job id you assigned to the current job.
+GITHUB_JOB: 'Job-Identifier-Sample'
+
+A unique number for each workflow run within a repository. This number does not change if you re-run the workflow run.
+GITHUB_RUN_ID: '1836698654'
+
+An unique number for each time the same workflow is run again. Starts at 1 and increments by 1.
+GITHUB_RUN_NUMBER: '18'
+
+The name of the runner executing the job.
+RUNNER_NAME: 'GitHub Actions 4'
+
+I love a pint of Guinness with a glass of Midleton and end the night on a Whiskey Sour.
+
+
+---------------- Inspect Environment Variables ----------------
+
+...
+
+APPDATA=C:\Users\runneradmin\AppData\Roaming
+AZURE_EXTENSION_DIR=C:\Program Files\Common Files\AzureCliExtensionDirectory
+BEST_PINT=Guinness
+BEST_WHISKEY=Midleton
+CABAL_DIR=C:\cabal
+ChocolateyInstall=C:\ProgramData\chocolatey
+
+...
+```
+
 To set a custom environment variable, you must define it in the workflow file. The scope of a custom environment variable is limited to the element in which it is defined. You can define environment variables that are scoped for:
 
 The entire workflow, by using env at the top level of the workflow file.
@@ -90,7 +175,35 @@ But since we're specifying powershell core we use $env:Name
 
 run: notice that $BEST_COCKTAIL is not listed, while the other two are. This is because $BEST_COCKTAIL is bounded to that step.
 
-##3. Calling local Composite Actions
+##3. Calling local Composite Action
+
+[**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex3-composite-action.yml)
+```yaml
+name: 3 - Running a local Composite Action
+
+on:
+  push:
+    branches: [
+        main,
+        another-branch
+    ]
+
+jobs:
+  Run-Composite-Action:
+    name: Print message from another action
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2                 # <- Required to checkout your code in order to access composite actions from with the repo
+      - name: Use hello world composite action
+        uses: ./.github/actions/hello-world       # <- Use keyword for calling other actions
+```
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467513?check_suite_focus=true)
+```
+Run ./.github/actions/hello-world
+Run Write-Host "Hello World from Composite Action!"
+Hello World from Composite Action!
+```
 
 Each custom action requires its own directory and action.yml to define it.
 [link](https://dev.to/jameswallis/using-github-composite-actions-to-make-your-workflows-smaller-and-more-reusable-476l)

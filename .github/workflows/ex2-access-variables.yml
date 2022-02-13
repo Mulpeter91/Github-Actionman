@@ -19,7 +19,8 @@ jobs:
       BEST_WHISKEY: Midleton                      # <- Scoped to this job and subsequent steps.         
     
     steps:  
-      - uses: actions/checkout@v2               
+      - uses: actions/checkout@v2   
+        
       - name: Print Variables to Script
         run: ./Powershell/GithubEnvVariables.ps1
         env:
