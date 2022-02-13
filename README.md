@@ -372,7 +372,8 @@ DOJO_3=Cobra-Kai Karate
 Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 ```
 
-### 4.4 Pass Variable to Dependant Job (Work in Progress)
+### 4.4 Pass Variable to Dependant Job
+<div style="color:red"> 4.4 WORK IN PROGRESS & INCOMPLETE</div>
 
 We previously noted that `jobs` are run concurrently by default and that variables are scoped to 
 the element they are defined in. The following example illustrates how you can enforce a dependency between jobs 
