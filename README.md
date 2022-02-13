@@ -24,7 +24,7 @@ your needs. The examples in this article are simple workflows created merely to 
 3. [Calling local composite action](#example-3)
 4. [Setting & Passing Variables](#example-4)
 
-## 1. <a id="example-1"></a>Executing Shell Commands
+## 1. <a id="example-1"></a>Executing Shell Commands 🐚
 
 The first example below is a very basic workflow executing different commands in their native shells. The point of this example 
 is to illustrate the role of the `run-on` and `shell` instructions. A workflow refers to all the instructions within the file, 
@@ -91,7 +91,7 @@ Run exec(open('./Python/HelloWorld.py').read())
 Hello World from Python!
 ```
 
-## 2. <a id="example-2"></a>Accessing Environment Variables
+## 2. <a id="example-2"></a>Accessing Environment Variables 🌱
 
 The following example illustrates how you can read `environment variables`. There are two kinds of variables, 
 those provided by github which use protected names and can be found in the [documentation](https://docs.github.com/en/actions/learn-github-actions/environment-variables),
@@ -179,7 +179,7 @@ ChocolateyInstall=C:\ProgramData\chocolatey
 You must remember to use the correct syntax for referencing variables in your target shell. For example, Windows runners would required the format `$env:NAME`
 while the Linux runners using bash shell would use `$NAME`.
 
-## 3. <a id="example-3"></a>Calling local Composite Action
+## 3. <a id="example-3"></a>Calling local Composite Action ⚙️
 
 [Composite actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
 are a specific type of workflow file which are designed to abstract out and reuse a set of instructions for one or more requesting workflows.
@@ -242,7 +242,7 @@ that you house them in their own directories within the `.github` directory. Whi
 files such as docker files, they must contain **one** `action` file. See working [repo](https://github.com/Mulpeter91/Github-Actionman/tree/main/.github/actions)
 for an example.
 
-## 4. <a id="example-4"></a>Setting and Passing Variables
+## 4. <a id="example-4"></a>Setting and Passing Variables 🤾
 
 The below `step` examples are all run on the same `workflow` file and combine parts of the previous code with
 the added fun of setting variables from outside the `yml` file and passing variables around the workflow.
