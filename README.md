@@ -1,3 +1,5 @@
+![Article Banner]()
+
 # Getting Started with Github Action Workflows
 
 This article gives a brief introduction to the concepts and syntax of github actions. While the 
