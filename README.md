@@ -187,9 +187,9 @@ They are typically stored in their own repositories, such as [Github's own share
 or [Google's integration actions](https://github.com/google-github-actions), but they can also be stored and executed in the same repository.
 
 A step utilises the `uses` keyword when executing a `composite action`. In the below example you will notice two steps
-each using a composite action, the first is using github's shared `actions/checkout@v2` and the other is using our local `composite action`.
+each using a composite action. The first is using github's shared `actions/checkout@v2` and the other is using our local `composite action`.
 
-Composite actions dependent on targeted releases to know which version of the code to execute. In the case of `checkout@v2` this is referencing release `v2`
+Composite actions depend on targeted releases to know which version of the code to execute. In the case of `checkout@v2` this is referencing release `v2`
 in the `checkout` repository. You need to checkout your code in order to build it, test it or in our case execute composite actions.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex3-composite-action.yml)
