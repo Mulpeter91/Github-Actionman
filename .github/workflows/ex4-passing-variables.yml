@@ -29,24 +29,12 @@ jobs:
 
       #Example 4.3
       - name: Set variables from powershell file
-        run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
-        
-      #Example 4.4
-      - name: Set an output variable
-      - id: step_4_4
-        run: echo "::set-output name=OBJECT_ID::2"
+        run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
         
       - name: Inspect Environment Variables
         run: env 
 
-        
-  Obtain-Variables:
-    needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
-    name: Reading previous variables
-    runs-on: windows-latest    
-    
-    steps:
-      - run: echo "${{ jobs.create-variables.steps.step_4_4.outputs.OBJECT_ID }}"
+
 
 
       
