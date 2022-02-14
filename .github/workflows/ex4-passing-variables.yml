@@ -42,4 +42,11 @@ jobs:
     steps:
       - name: Inspect Environment Variables
         run: env
+
+      - name: Executing iTop change request
+        shell: pwsh
+        run: |
+          $operations = "http://dev-itop.eaorg.us/itop/webservices/rest.php?version=1.3&json_data={ `"operation`": `"list_operations`" }"
+          $response = Invoke-WebRequest -Uri $operations -Method Get -TimeoutSec 120
+          Write-Host $response
       
