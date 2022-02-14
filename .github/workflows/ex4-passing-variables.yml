@@ -8,9 +8,9 @@ on:
     ]
 
 jobs:
-  Create-Variables:
+  create-variables:
     name: Creating and passing variables
-    runs-on: windows-latest
+    runs-on: windows-latest 
     
     steps:
       #Example 4.1
@@ -31,8 +31,14 @@ jobs:
       - name: Set variables from powershell file
         run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
         
+      #Example 4.4
+      - name: Set an output variable
+      - id: step_4_4
+        run: echo "::set-output name=OBJECT_ID::2"
+        
       - name: Inspect Environment Variables
-        run: env
+        run: env 
+
         
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
@@ -40,13 +46,7 @@ jobs:
     runs-on: windows-latest    
     
     steps:
-      - name: Inspect Environment Variables
-        run: env
+      - run: echo "${{ jobs.create-variables.steps.step_4_4.outputs.OBJECT_ID }}"
 
-      - name: Executing iTop change request
-        shell: pwsh
-        run: |
-          $operations = "http://dev-itop.eaorg.us/itop/webservices/rest.php?version=1.3&json_data={ `"operation`": `"list_operations`" }"
-          $response = Invoke-WebRequest -Uri $operations -Method Get -TimeoutSec 120
-          Write-Host $response
+
       
