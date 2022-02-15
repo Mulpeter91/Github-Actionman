@@ -19,7 +19,7 @@ Write-Host $RESPONSE
 
 "`n`nAccessing variables from the object:"
 $JSON_OBJECT = $RESPONSE | ConvertFrom-Json
-Write-Host "HTML URL: $JSON_OBJECT.html_url"
-Write-Host "TITLE: $JSON_OBJECT.title"
-Write-Host "BODY: $JSON_OBJECT.body"
-Write-Host "BODY: $JSON_OBJECT.user.login"
+Write-Host "HTML URL: ${ JSON_OBJECT.html_url }"
+Write-Host "TITLE:" $JSON_OBJECT.title
+Write-Host "BODY: ${{ $JSON_OBJECT.body }}"
+Write-Host "BODY:" $JSON_OBJECT.user.login
