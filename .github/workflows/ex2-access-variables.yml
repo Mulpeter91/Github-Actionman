@@ -6,9 +6,10 @@ on:
         main,
         another-branch
     ]
-  pull_request:
+  pull_request:                                   # <- Pull request trigger.
     branches: [
-        main
+        main,                                     # <- If any PR is made to branch 'main'.
+        releases/**                               # <- Any branch that starts with release/.       
     ]
 
 env:
