@@ -1,4 +1,4 @@
-name: 5 - Web Requests
+name: 5 - Process Web Requests
 
 on:
   pull_request:
