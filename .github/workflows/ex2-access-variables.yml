@@ -33,13 +33,3 @@ jobs:
       - name: Inspect Environment Variables
         run: env                                   # <- Prints to output the available variables to this step.
   
-  Pull-Request-Variables:
-    name: Obtain variables useful to a pull request
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Print Relevant Variables              # <- Use a pipe on line one of the run to initiate a multi-line command.
-        run: |
-          Write-Host "Actor to initiate workflow: ${{ $Env:GITHUB_ACTOR }}"
