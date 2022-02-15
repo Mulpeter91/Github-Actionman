@@ -36,7 +36,8 @@ jobs:
   Pull-Request-Variables:
     name: Obtain variables useful to a pull request
     runs-on: windows-latest
-
+    env: 
+      var: nothing
     steps:
       - uses: actions/checkout@v2
 
