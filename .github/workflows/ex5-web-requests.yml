@@ -5,17 +5,20 @@ on:
     branches: [
         main
     ]
+  push:
+    branches: [
+        main
+    ]
 
 jobs:
-  Obtain-Request-Data:
+  Obtain-Pull-Request-Data:
     name: Call Github API
     runs-on: windows-latest        
+    env:
+      PR_STATE: Closed
     
     steps:
       - uses: actions/checkout@v2
-
-      - name: Print Environment Variables
-        run: env
 
       - name: Call the Github /pulls endpoint
         run: ./Powershell/GithubApiRequest.ps1
