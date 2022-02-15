@@ -40,5 +40,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Inspect Environment Variables
-        run: env                                   # <- Prints to output the available variables to this step.
+      - name: Print Variables for Pull Request
+        run: |
+          Write-Host "Actor: $Env:GITHUB_ACTOR"
+        
+      
