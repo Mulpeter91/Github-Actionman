@@ -102,7 +102,7 @@ Declared variables within the workflow using the keyword `env` follow an access 
 `workflow` level can be accessed by all `jobs` and `steps`. Variables declared within a `job` can only be used by steps within that job and if
 declared inside a `step` they can only be used by that step.
 
-### 2.1 Generic Environment Variables
+### 2.1 Custom & Protected Environment Variables
 
 In the below workflow example you can see that 3 custom variables are declared at different levels: 
 `BEST_PINT`, `BEST_WHISKEY` and `BEST_COCKTAIL`. In the `Print Variables to Script` step a [script](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubEnvVariables.ps1) 
@@ -186,7 +186,7 @@ ChocolateyInstall=C:\ProgramData\chocolatey
 You must remember to use the correct syntax for referencing variables in your target shell. For example, Windows runners would required the format `$env:NAME`
 while the Linux runners using bash shell would use `$NAME`.
 
-### 2.2 Specific Event Environment Variables
+### 2.2 Specific Event Variables
 
 Most github environment variables will always populate, such as `GITHUB_ACTOR` but some will only be populated during a specific event trigger. In the above
 `workflow` example you can see a trigger has been added for `pull_request`. This has been added to show
