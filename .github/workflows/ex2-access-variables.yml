@@ -6,7 +6,11 @@ on:
         main,
         another-branch
     ]
-    
+  pull_request:
+    branches: [
+        main
+    ]
+
 env:
   BEST_PINT: Guinness                             # <- Custom Env variables are set within the workflow file.
                                                   # <- High order variables are scoped to everything within the workflow.
