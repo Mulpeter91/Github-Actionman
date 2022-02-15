@@ -8,8 +8,7 @@ on:
     ]
   pull_request:                                   # <- Pull request trigger.
     branches: [
-        main,                                     # <- If any PR is made to branch 'main'.
-        releases/**                               # <- Any branch that starts with release/.       
+        main                                      # <- If any PR is made to branch 'main'.      
     ]
 
 env:
