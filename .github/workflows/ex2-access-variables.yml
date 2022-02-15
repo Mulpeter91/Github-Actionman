@@ -8,7 +8,7 @@ on:
     ]
   pull_request:                                   # <- Pull request trigger.
     branches: [
-        main                                      # <- If any PR is made to branch 'main'.      
+        main                                      # <- If any pull request is made to branch 'main'.      
     ]
 
 env:
@@ -16,6 +16,7 @@ env:
                                                   # <- High order variables are scoped to everything within the workflow.
 
 jobs:
+  #Example 2.1
   Job-Identifier-Sample:
     name: Printing Github Environment Variables
     runs-on: windows-latest
@@ -33,18 +34,17 @@ jobs:
       - name: Inspect Environment Variables
         run: env                                   # <- Prints to output the available variables to this step.
   
+  #Example 2.2
   Pull-Request-Variables:
     name: Obtain variables useful to a pull request
     runs-on: windows-latest
-    env: 
-      var: nothing
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Print Variables for Pull Request
+      - name: Print Variables for Pull Request     # <- Add a pipe key on the run command to include multiple commands.
         run: |
           Write-Host "Actor: $Env:GITHUB_ACTOR"
           Write-Host "Target Branch: $Env:GITHUB_BASE_REF"
           Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
           
-        

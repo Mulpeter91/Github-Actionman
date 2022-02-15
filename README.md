@@ -102,6 +102,8 @@ Declared variables within the workflow using the keyword `env` follow an access 
 `workflow` level can be accessed by all `jobs` and `steps`. Variables declared within a `job` can only be used by steps within that job and if
 declared inside a `step` they can only be used by that step.
 
+### 2.1 Generic Environment Variables
+
 In the below workflow example you can see that 3 custom variables are declared at different levels: 
 `BEST_PINT`, `BEST_WHISKEY` and `BEST_COCKTAIL`. In the `Print Variables to Script` step a [script](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubEnvVariables.ps1) 
 is executed to print these variables to the console along with a sample of various set github environment variables.
@@ -116,12 +118,17 @@ on:
         main,
         another-branch
     ]
+  pull_request:                                   # <- Pull request trigger.
+    branches: [
+        main                                      # <- If any pull request is made to branch 'main'.      
+    ]
 
 env:
   BEST_PINT: Guinness                             # <- Custom Env variables are set within the workflow file.
-                                                  # <- High order variables are scoped to everything within the workflow.
+  # <- High order variables are scoped to everything within the workflow.
 
 jobs:
+  #Example 2.1
   Job-Identifier-Sample:
     name: Printing Github Environment Variables
     runs-on: windows-latest
@@ -130,14 +137,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Print Variables to Script
         run: ./Powershell/GithubEnvVariables.ps1
         env:
           BEST_COCKTAIL: Whiskey Sour              # <- Scoped to this step only.
 
       - name: Inspect Environment Variables
-        run: env                                   # <- Prints to output the available variables to this step. 
+        run: env                                   # <- Prints to output the available variables to this step.
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467512?check_suite_focus=true)
 ```
@@ -178,6 +185,36 @@ ChocolateyInstall=C:\ProgramData\chocolatey
 
 You must remember to use the correct syntax for referencing variables in your target shell. For example, Windows runners would required the format `$env:NAME`
 while the Linux runners using bash shell would use `$NAME`.
+
+### 2.2 Specific Event Environment Variables
+
+Most github environment variables will always populate, such as `GITHUB_ACTOR` but some will only be populated during a specific event trigger. In the above
+`workflow` example you can see a trigger has been added for `pull_request`. This has been added to show
+you some of the variables that will only exist during that event, such as `GITHUB_BASE_REF` and `GITHUB_HEAD_REF`.
+
+[**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
+```yaml
+  #Example 2.2
+  Pull-Request-Variables:
+    name: Obtain variables useful to a pull request
+    runs-on: windows-latest
+    env:
+      var: nothing
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Print Variables for Pull Request     # <- Add a pipe key on the run command to make a multiple.
+        run: |
+          Write-Host "Actor: $Env:GITHUB_ACTOR"
+          Write-Host "Target Branch: $Env:GITHUB_BASE_REF"
+          Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
+```
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5198208204?check_suite_focus=true)
+```
+Actor: Mulpeter91
+Target Branch: main
+Source Branch: pull-request-ex
+```
 
 ## 3. <a id="example-3"></a>Calling local Composite Action ⚙️
 
