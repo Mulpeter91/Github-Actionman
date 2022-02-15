@@ -22,3 +22,5 @@ $DATA = Get-Content -Path D:\a\_temp\_github_workflow\event.json
 Write-Host $DATA
 $JSON = $DATA | ConvertFrom-Json
 Write-Host $JSON
+
+"Test"
