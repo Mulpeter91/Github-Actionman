@@ -1,0 +1,22 @@
+name: 5 - Web Requests
+
+on:
+  pull_request:
+    branches: [
+        main
+    ]
+
+jobs:
+  Obtain-Request-Data:
+    name: Call Github API
+    runs-on: windows-latest        
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Print Environment Variables
+        run: env
+
+      - name: Call the Github /pulls endpoint
+        run: ./Powershell/GithubApiRequest.ps1
+          
