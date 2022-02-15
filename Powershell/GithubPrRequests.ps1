@@ -16,7 +16,7 @@ Write-Host $URI
 $RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
 Write-Host $RESPONSE
 
-"`n`nAccessing variables from the object:"
+"`n`nAccessing variables from the object: "
 $JSON_OBJECT = $RESPONSE | ConvertFrom-Json
 Write-Host "HTML URL:" $JSON_OBJECT.html_url
 Write-Host "TITLE:" $JSON_OBJECT.title
