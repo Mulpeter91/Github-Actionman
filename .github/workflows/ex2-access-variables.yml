@@ -43,5 +43,7 @@ jobs:
       - name: Print Variables for Pull Request
         run: |
           Write-Host "Actor: $Env:GITHUB_ACTOR"
+          Write-Host "Target Branch: $Env:GITHUB_BASE_REF"
+          Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
+          
         
-      
