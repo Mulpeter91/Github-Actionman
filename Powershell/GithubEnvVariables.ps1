@@ -19,5 +19,6 @@
 "I love a pint of $Env:BEST_PINT with a glass of $Env:BEST_WHISKEY and end the night on a $Env:BEST_COCKTAIL."
 
 $DATA = Get-Content -Path D:\a\_temp\_github_workflow\event.json
+Write-Host $DATA
 $JSON = $DATA | ConvertFrom-Json
-Write-Host: $JSON
+Write-Host $JSON
