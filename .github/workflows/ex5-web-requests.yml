@@ -11,7 +11,7 @@ jobs:
     name: Call Github API
     runs-on: windows-latest        
     env:
-      PR_STATE: Closed
+      PR_STATE: closed      # <- query parameters to github are case sensitive
     
     steps:
       - uses: actions/checkout@v2
