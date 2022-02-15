@@ -17,3 +17,7 @@
 "RUNNER_NAME: '$Env:RUNNER_NAME'`n"
 
 "I love a pint of $Env:BEST_PINT with a glass of $Env:BEST_WHISKEY and end the night on a $Env:BEST_COCKTAIL."
+
+$DATA = Get-Content -Path D:\a\_temp\_github_workflow\event.json
+$JSON = $DATA | ConvertFrom-Json
+Write-host: $JSON
