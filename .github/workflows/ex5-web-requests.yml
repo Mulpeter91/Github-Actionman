@@ -17,5 +17,5 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Call the Github /pulls endpoint
-        run: ./Powershell/GithubPrRequest.ps1
+        run: ./Powershell/GithubPrRequests.ps1
           
