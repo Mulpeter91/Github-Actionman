@@ -124,13 +124,12 @@ on:
     ]
 
 env:
-  BEST_PINT: Guinness                             # <- Custom Env variables are set within the workflow file.
-  # <- High order variables are scoped to everything within the workflow.
+  BEST_PINT: Guinness                             # <- Custom environment variable declared at workflow level.
 
 jobs:
   #Example 2.1
-  Job-Identifier-Sample:
-    name: Printing Github Environment Variables
+  Access-Environment-Variables:
+    name: Print Github Environment Variables
     runs-on: windows-latest
     env:
       BEST_WHISKEY: Midleton                      # <- Scoped to this job and subsequent steps.         
@@ -182,7 +181,6 @@ ChocolateyInstall=C:\ProgramData\chocolatey
 ...
 ```
 
-
 You must remember to use the correct syntax for referencing variables in your target shell. For example, Windows runners would required the format `$env:NAME`
 while the Linux runners using bash shell would use `$NAME`.
 
@@ -216,11 +214,11 @@ Target Branch: main
 Source Branch: pull-request-ex
 ```
 
-### 2.3 Accessing Metadata
+### 2.3 Accessing Event Metadata
 
 Another variable worth noting and is heavily effected by the action event type is `GITHUB_EVENT_PATH`. This variable contains the directory 
-within your runner to an `event.json` file. This file contains substantial metadata regarding the event triggered within the workflow which 
-can be fed into a json object for easy access to specific variables.
+within your runner to a temporarily stored `event.json` file. This file contains substantial metadata regarding the specific event triggered 
+within the workflow and can be fed into a json object for easy access to specific data nodes.
 
 Every event type has it's own structured version of the file. So what exists in a `pull_request`:`event.json` will not exactly match the
 nodes in a `push`:`event.json`.
@@ -233,16 +231,24 @@ nodes in a `push`:`event.json`.
 ```
 [**File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```shell
-"Event log path: $Env:GITHUB_EVENT_PATH"
-$DATA = Get-Content -Path $Env:GITHUB_EVENT_PATH
-$JSON = $DATA | ConvertFrom-Json
-Write-Host $JSON
+"Event metadata file path: $Env:GITHUB_EVENT_PATH`n"
+"File Contents:"
+$EVENT_FILE = Get-Content -Path $Env:GITHUB_EVENT_PATH
+Write-Host $EVENT_FILE
+
+$EVENT_JSON = $EVENT_FILE | ConvertFrom-Json
+"`nSample selectors"
+Write-Host "OBJECT.head_commit.author.username:" $EVENT_JSON.head_commit.author.username
+Write-Host "OBJECT.head_commit.url:" $EVENT_JSON.head_commit.url
 ```
-[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5198208204?check_suite_focus=true)
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5219495371?check_suite_focus=true)
 ```shell
-Actor: Mulpeter91
-Target Branch: main
-Source Branch: pull-request-ex
+Event metadata file path: D:\a\_temp\_github_workflow\event.json
+File Contents: (see above console link)
+
+Sample selectors
+OBJECT.head_commit.author.username: Mulpeter91
+OBJECT.head_commit.url: https://github.com/Mulpeter91/Github-Actionman/commit/443da01e18050bd8912d3fac24a86f0c340a2ea8
 ```
 
 ## 3. <a id="example-3"></a>Calling local Composite Action ⚙️

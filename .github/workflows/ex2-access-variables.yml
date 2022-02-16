@@ -12,8 +12,7 @@ on:
     ]
 
 env:
-  BEST_PINT: Guinness                             # <- Custom Env variables are set within the workflow file.
-                                                  # <- High order variables are scoped to everything within the workflow.
+  BEST_PINT: Guinness                             # <- Custom environment variable declared at workflow level.
 
 jobs:
   #Example 2.1
