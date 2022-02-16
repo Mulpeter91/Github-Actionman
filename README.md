@@ -229,7 +229,7 @@ nodes in a `push`:`event.json`.
 - name: Print Json from Action Event File
   run: ./PowershellEventFile.ps1
 ```
-[**File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
+[**File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubEventFile.ps1)
 ```shell
 "Event metadata file path: $Env:GITHUB_EVENT_PATH`n"
 "File Contents:"
