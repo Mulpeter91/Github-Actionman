@@ -50,5 +50,5 @@ jobs:
        
       #Example 2.3   
       - name: Print Json from Action Event File
-        run: ./PowershellEventFile.ps1
+        run: ./Powershell/GithubEventFile.ps1
           

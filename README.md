@@ -5,7 +5,7 @@
 This article gives a brief introduction to the concepts and syntax of github actions. While the 
 [official documentation](https://docs.github.com/en/actions) of github actions is comprehensive, the aim of this article is to help avoid those early learning mistakes.
 
-## Context
+## Context 👨🏼‍🏫
 
 Github actions is a platform to automate developer workflows. It was built to reduce the organisational 
 burden attached to large open-source community driven repositories. This burden would manifest in the form 
@@ -227,9 +227,9 @@ nodes in a `push`:`event.json`.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```yaml
-   #Example 2.3   
-  - name: Print Json from Action Event File
-    run: ./PowershellEventFile.ps1
+#Example 2.3   
+- name: Print Json from Action Event File
+  run: ./PowershellEventFile.ps1
 ```
 [**File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```shell
@@ -373,11 +373,11 @@ The following example combines a parameterised composite action with reading the
 
 [**Job 1 / Step 2**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
-      #Example 4.2
-      - name: Set variables from environment file
-        uses: ./.github/actions/read-env-file
-        with:
-          filePath: ./.github/variables/variables.env
+#Example 4.2
+- name: Set variables from environment file
+  uses: ./.github/actions/read-env-file
+  with:
+    filePath: ./.github/variables/variables.env
 ```
 Using `>> $Env:GITHUB_ENV` instructs github to read the variable into the environment variable dictionary.
 
@@ -424,9 +424,9 @@ by executing a `powershell` script directly in the workflow step.
 
 [**Job 1 / Step 3**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
-     #Example 4.3
-     - name: Set variables from powershell file
-       run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
+#Example 4.3
+- name: Set variables from powershell file
+  run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
 ```
 [**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/Variables.ps1)
 ```shell
@@ -450,14 +450,14 @@ job to the `dependent job` by using the `xxx` keyword.
 
 [**Job 2 / Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
-  Obtain-Variables:
-    needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
-    name: Reading previous variables
-    runs-on: windows-latest
+Obtain-Variables:
+  needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
+  name: Reading previous variables
+  runs-on: windows-latest
 
-    steps:
-      - name: Inspect Environment Variables
-        run: env
+  steps:
+    - name: Inspect Environment Variables
+      run: env
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
 ```shell
