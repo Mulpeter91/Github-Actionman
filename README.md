@@ -24,6 +24,9 @@ your needs. The examples in this article are simple workflows created merely to 
 3. [Calling local composite action](#example-3)
 4. [Setting & Passing Variables](#example-4)
 
+<div style=height:30px;">
+</div>
+
 ## 1. <a id="example-1"></a>Executing Shell Commands 🐚
 
 The first example below is a very basic workflow executing different commands in their native shells. The point of this example 
@@ -90,6 +93,9 @@ hello world from Zshell!
 Run exec(open('./Python/HelloWorld.py').read())
 Hello World from Python!
 ```
+
+<div style=height:30px;">
+</div>
 
 ## 2. <a id="example-2"></a>Accessing Environment Variables 🌱
 
@@ -167,6 +173,7 @@ RUNNER_NAME: 'GitHub Actions 4'
 
 I love a pint of Guinness with a glass of Midleton and end the night on a Whiskey Sour.
 ```
+
 A useful command to inspect available environment variables within a step is `run: env`. Notice that the below output does not contain `BEST_COCKTAIL` because it was defined and scoped to the previous step.
 ```shell
 ...
@@ -251,6 +258,9 @@ OBJECT.head_commit.author.username: Mulpeter91
 OBJECT.head_commit.url: https://github.com/Mulpeter91/Github-Actionman/commit/443da01e18050bd8912d3fac24a86f0c340a2ea8
 ```
 
+<div style=height:30px;">
+</div>
+
 ## 3. <a id="example-3"></a>Calling local Composite Action ⚙️
 
 [Composite actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
@@ -314,6 +324,9 @@ Another important point regarding `composite actions` is that they must be defin
 that you house them in their own directories within the `.github` directory. While these directories can contain other
 files such as docker files, they must contain **one** `action` file. See working [repo](https://github.com/Mulpeter91/Github-Actionman/tree/main/.github/actions)
 for an example.
+
+<div style=height:30px;">
+</div>
 
 ## 4. <a id="example-4"></a>Setting and Passing Variables 🤾
 
