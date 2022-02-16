@@ -31,6 +31,12 @@ jobs:
       - name: Set variables from powershell file
         run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
         
+      #Example 4.4
+      - name: Set local step variable to environment variable
+        run: echo "WORKFLOW_VARIABLE=$(echo ${LOCAL_VARIABLE})" >> $GITHUB_ENV
+        env:
+          LOCAL_VARIABLE: Karate Kid
+        
       - name: Inspect Environment Variables
         run: env 
 
