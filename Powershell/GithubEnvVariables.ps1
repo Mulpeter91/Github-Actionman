@@ -17,3 +17,10 @@
 "RUNNER_NAME: '$Env:RUNNER_NAME'`n"
 
 "I love a pint of $Env:BEST_PINT with a glass of $Env:BEST_WHISKEY and end the night on a $Env:BEST_COCKTAIL."
+
+"Event log path: $Env:GITHUB_EVENT_PATH"
+$DATA = Get-Content -Path $Env:GITHUB_EVENT_PATH
+$JSON = $DATA | ConvertFrom-Json
+Write-Host $JSON
+
+"Test"
