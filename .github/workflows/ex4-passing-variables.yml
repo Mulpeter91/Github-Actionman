@@ -41,7 +41,6 @@ jobs:
       - name: Inspect Environment Variables
         run: env 
 
-        
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
     name: Reading previous variables
