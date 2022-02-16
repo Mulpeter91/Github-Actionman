@@ -20,7 +20,7 @@ While CI/CD is often used to convey its utility, it is just one of many possible
 your needs. The examples in this article are simple workflows created merely to introduce some of the basic concepts.
 
 1. [Executing Shell Commands](#example-1)
-2. [Accessing environment variables and metadata](#example-2)
+2. [Accessing environment variables](#example-2)
 3. [Calling local composite action](#example-3)
 4. [Setting & Passing Variables](#example-4)
 
@@ -77,7 +77,7 @@ jobs:                                           # <- The execution of work block
         run: exec(open('./Python/HelloWorld.py').read())
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467514?check_suite_focus=true)
-```
+```shell
 Run ./Powershell/HelloWorld.ps1
 Hello World from Powershell!
 
@@ -147,7 +147,7 @@ jobs:
         run: env                                   # <- Prints to output the available variables to this step.
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467512?check_suite_focus=true)
-```
+```shell
 The owner and repository name.
 GITHUB_REPOSITORY: 'Mulpeter91/Github-Actionman'
 
@@ -169,7 +169,7 @@ RUNNER_NAME: 'GitHub Actions 4'
 I love a pint of Guinness with a glass of Midleton and end the night on a Whiskey Sour.
 ```
 A useful command to inspect available environment variables within a step is `run: env`. Notice that the below output does not contain `BEST_COCKTAIL` because it was defined and scoped to the previous step.
-```
+```shell
 ...
 
 APPDATA=C:\Users\runneradmin\AppData\Roaming
@@ -190,7 +190,7 @@ while the Linux runners using bash shell would use `$NAME`.
 
 Most github environment variables will always populate, such as `GITHUB_ACTOR` but some will only be populated during a specific event trigger. In the above
 `workflow` example you can see a trigger has been added for `pull_request`. This has been added to show
-you some of the variables that will only exist during that event, such as `GITHUB_BASE_REF` and `GITHUB_HEAD_REF`.
+you some of the variables that will only populate during that event, such as `GITHUB_BASE_REF` and `GITHUB_HEAD_REF`.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```yaml
@@ -210,7 +210,7 @@ you some of the variables that will only exist during that event, such as `GITHU
           Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5198208204?check_suite_focus=true)
-```
+```shell
 Actor: Mulpeter91
 Target Branch: main
 Source Branch: pull-request-ex
@@ -218,7 +218,32 @@ Source Branch: pull-request-ex
 
 ### 2.3 Accessing Metadata
 
-Work in progress ...
+Another variable worth noting and is heavily effected by the action event type is `GITHUB_EVENT_PATH`. This variable contains the directory 
+within your runner to an `event.json` file. This file contains substantial metadata regarding the event triggered within the workflow which 
+can be fed into a json object for easy access to specific variables.
+
+Every event type has it's own structured version of the file. So what exists in a `pull_request`:`event.json` will not exactly match the
+nodes in a `push`:`event.json`.
+
+[**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
+```yaml
+   #Example 2.3   
+  - name: Print Json from Action Event File
+    run: ./PowershellEventFile.ps1
+```
+[**File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
+```shell
+"Event log path: $Env:GITHUB_EVENT_PATH"
+$DATA = Get-Content -Path $Env:GITHUB_EVENT_PATH
+$JSON = $DATA | ConvertFrom-Json
+Write-Host $JSON
+```
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5198208204?check_suite_focus=true)
+```shell
+Actor: Mulpeter91
+Target Branch: main
+Source Branch: pull-request-ex
+```
 
 ## 3. <a id="example-3"></a>Calling local Composite Action ⚙️
 
@@ -255,6 +280,7 @@ jobs:
       - name: Use hello world composite action
         uses: ./.github/actions/hello-world       # <- Use keyword for calling other actions
 ```
+
 The `composite action` file requires a `name` and `description` field with an optional `author` field.
 The run also needs to add `using: 'composite'` before executing its steps.
 
@@ -271,7 +297,7 @@ runs:
       shell: pwsh
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173467513?check_suite_focus=true)
-```
+```shell
 Run ./.github/actions/hello-world
 Run Write-Host "Hello World from Composite Action!"
 Hello World from Composite Action!
@@ -334,7 +360,7 @@ runs:
       shell: pwsh
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
-```
+```shell
 Run ./.github/actions/print-message
 Run Write-Host Cobra Kai never dies 🤟🏻
 Cobra Kai never dies 🤟🏻
@@ -378,12 +404,12 @@ runs:
 It is advised to keep all variable related files within the `.github` directory.
 
 [**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/variables/variables.env)
-```
+```shell
 DOJO_1=Miyagi-Do Karate
 ```
 
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
-```
+```shell
 Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
   Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
   shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
@@ -394,7 +420,7 @@ Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 ### 4.3 Set Variables from Powershell File
 
 The following example achieves the same outcome of example 4.2 but adds environment variables
-by executing a `powershell` script directly.
+by executing a `powershell` script directly in the workflow step.
 
 [**Job 1 / Step 3**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -403,13 +429,13 @@ by executing a `powershell` script directly.
        run: Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV   
 ```
 [**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/Variables.ps1)
-```
+```shell
 DOJO_2=Eagle Fang Karate
 DOJO_3=Cobra-Kai Karate
 ```
 
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
-```
+```shell
 Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 ```
 
@@ -434,7 +460,7 @@ job to the `dependent job` by using the `xxx` keyword.
         run: env
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
-```
+```shell
 Work in Progress
 ```
 

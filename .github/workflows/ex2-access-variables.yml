@@ -17,8 +17,8 @@ env:
 
 jobs:
   #Example 2.1
-  Job-Identifier-Sample:
-    name: Printing Github Environment Variables
+  Access-Environment-Variables:
+    name: Print Github Environment Variables
     runs-on: windows-latest
     env:
       BEST_WHISKEY: Midleton                      # <- Scoped to this job and subsequent steps.         
@@ -34,17 +34,21 @@ jobs:
       - name: Inspect Environment Variables
         run: env                                   # <- Prints to output the available variables to this step.
   
-  #Example 2.2
-  Pull-Request-Variables:
-    name: Obtain variables useful to a pull request
+  Other-Environment-Variables:
+    name: Print Niche Environment Variables
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
 
+      #Example 2.2
       - name: Print Variables for Pull Request     # <- Add a pipe key on the run command to include multiple commands.
         run: |
           Write-Host "Actor: $Env:GITHUB_ACTOR"
           Write-Host "Target Branch: $Env:GITHUB_BASE_REF"
           Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
+       
+      #Example 2.3   
+      - name: Print Json from Action Event File
+        run: ./PowershellEventFile.ps1
           
