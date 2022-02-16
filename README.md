@@ -24,8 +24,7 @@ your needs. The examples in this article are simple workflows created merely to 
 3. [Calling local composite action](#example-3)
 4. [Setting & Passing Variables](#example-4)
 
-<div style=height:30px;">
-</div>
+<div style=height:12px;border-radius:10px;background:#b3b5b5;margin-top:25px;"></div>
 
 ## 1. <a id="example-1"></a>Executing Shell Commands 🐚
 
