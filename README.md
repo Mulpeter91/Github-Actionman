@@ -24,7 +24,8 @@ your needs. The examples in this article are simple workflows created merely to 
 3. [Calling local composite action](#example-3)
 4. [Setting & Passing Variables](#example-4)
 
-<div style=height:12px;border-radius:10px;background:#b3b5b5;margin-top:25px;"></div>
+<br>
+<br>
 
 ## 1. <a id="example-1"></a>Executing Shell Commands 🐚
 
@@ -93,8 +94,8 @@ Run exec(open('./Python/HelloWorld.py').read())
 Hello World from Python!
 ```
 
-<div style=height:30px;">
-</div>
+<br>
+<br>
 
 ## 2. <a id="example-2"></a>Accessing Environment Variables 🌱
 
@@ -257,8 +258,8 @@ OBJECT.head_commit.author.username: Mulpeter91
 OBJECT.head_commit.url: https://github.com/Mulpeter91/Github-Actionman/commit/443da01e18050bd8912d3fac24a86f0c340a2ea8
 ```
 
-<div style=height:30px;">
-</div>
+<br>
+<br>
 
 ## 3. <a id="example-3"></a>Calling local Composite Action ⚙️
 
@@ -324,8 +325,8 @@ that you house them in their own directories within the `.github` directory. Whi
 files such as docker files, they must contain **one** `action` file. See working [repo](https://github.com/Mulpeter91/Github-Actionman/tree/main/.github/actions)
 for an example.
 
-<div style=height:30px;">
-</div>
+<br>
+<br>
 
 ## 4. <a id="example-4"></a>Setting and Passing Variables 🤾
 
@@ -459,7 +460,11 @@ Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 
 ### 4.4 Pass Variable to Dependant Job
 
-WORK IN PROGRESS & INCOMPLETE
+Work in Progress
+
+### 4.5 Pass Variable to Dependant Job
+
+Work in Progress
 
 We previously noted that `jobs` are run concurrently by default and that variables are scoped to 
 the element they are defined in. The following example illustrates how you can enforce a dependency between jobs 
@@ -481,6 +486,16 @@ Obtain-Variables:
 ```shell
 Work in Progress
 ```
+
+<br>
+<br>
+
+## 5. Web Requests
+
+Work in progress
+
+<br>
+<br>
 
 ## Conclusion
 
