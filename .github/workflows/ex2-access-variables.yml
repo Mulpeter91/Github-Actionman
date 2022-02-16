@@ -49,6 +49,6 @@ jobs:
           Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
        
       #Example 2.3   
-      - name: Print Json from Action Event File
+      - name: Print Json nodes from Action Event File
         run: ./Powershell/GithubEventFile.ps1
           
