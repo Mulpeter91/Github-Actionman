@@ -1,5 +1,7 @@
 "Event metadata file path: $Env:GITHUB_EVENT_PATH`n"
-$DATA = Get-Content -Path $Env:GITHUB_EVENT_PATH
-Write-Host $DATA
+$FILE_DATA = Get-Content -Path $Env:GITHUB_EVENT_PATH
+
+Write-Host $FILE_DATA "`n`n"
 $JSON = $DATA | ConvertFrom-Json
-Write-Host $JSON
+"Sample output nodes:"
+"head_commit.author.username:" $JSON.head_commit.author.username
