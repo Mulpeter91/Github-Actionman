@@ -2,6 +2,6 @@
 $FILE_DATA = Get-Content -Path $Env:GITHUB_EVENT_PATH
 
 Write-Host $FILE_DATA
-$JSON = $DATA | ConvertFrom-Json
+$JSON = $FILE_DATA | ConvertFrom-Json
 "Sample output nodes:"
 "head_commit.author.username:" $JSON.head_commit.author.username
