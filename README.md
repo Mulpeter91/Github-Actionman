@@ -1,4 +1,4 @@
-![Article Banner](https://github.com/Mulpeter91/Github-Actionman/blob/main/ReadMeImages/Banner.png)
+![Article Banner](https://github.com/Mulpeter91/Github-Actionman/blob/main/ReadMeImages/Actions_Article_Banner.png)
 
 # Getting Started with Github Action Workflows
 
