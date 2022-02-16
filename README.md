@@ -118,7 +118,7 @@ on:
         main,
         another-branch
     ]
-  pull_request:                                   # <- Pull request trigger.
+  pull_request:                                   # <- Pull request trigger. Used in Example 2.2.
     branches: [
         main                                      # <- If any pull request is made to branch 'main'.      
     ]
