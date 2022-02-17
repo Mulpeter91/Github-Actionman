@@ -47,7 +47,8 @@ jobs:
       - id: step_output
         name: Create variable output from step
         run: |   
-          echo "::set-output name=TONIGHTS_DINNER::burrito" 
+          echo "::set-output name=TONIGHTS_DINNER::burrito"
+          echo $Env:TONIGHTS_DINNER
         
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
@@ -58,4 +59,4 @@ jobs:
       #Example 4.5
       - name: Print output variable from previous job
         run: |
-          Write-Host ${{ Env:needs.create-variables.output.dinner }}
+          echo ${{ Env:needs.create-variables.output.dinner }}
