@@ -467,7 +467,7 @@ the github environment dictionary.
 #Example 4.4
 - name: Write local variables to environment variable dictionary
   run: |
-    echo $Env:LOCAL_VARIABLE
+    echo $Env:LOCAL_VARIABLE 
   env:
     LOCAL_VARIABLE: Karate Kid
 
