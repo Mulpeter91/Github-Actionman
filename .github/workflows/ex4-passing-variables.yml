@@ -52,10 +52,10 @@ jobs:
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
     name: Reading previous variables
-    runs-on: ubuntu-latest    
+    runs-on: windows-latest    
     
     steps:
       #Example 4.5
       - name: Print output variable from previous job
         run: |
-          echo ${{ needs.create-variables.output.dinner }}
+          Write-Host ${{ Env:needs.create-variables.output.dinner }}
