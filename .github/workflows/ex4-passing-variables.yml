@@ -58,5 +58,7 @@ jobs:
     steps:
       #Example 4.5
       - name: Print output variable from previous job
-        run: |
-          echo ${{ Env:needs.create-variables.output.dinner }}
+        run: echo ${Dinner}
+        env:
+          Dinner: ${{ needs.create-variables.output.dinner }}
+          
