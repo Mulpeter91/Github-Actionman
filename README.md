@@ -20,8 +20,8 @@ While CI/CD is often used to convey its utility, it is just one of many possible
 your needs. The examples in this article are simple workflows created merely to introduce some of the basic concepts.
 
 1. [Executing Shell Commands](#example-1)
-2. [Accessing environment variables](#example-2)
-3. [Calling local composite action](#example-3)
+2. [Accessing Environment Variables](#example-2)
+3. [Calling Composite Actions](#example-3)
 4. [Setting & Passing Variables](#example-4)
 5. [Making Web Service Calls](#example-5)
 
@@ -262,7 +262,7 @@ OBJECT.head_commit.url: https://github.com/Mulpeter91/Github-Actionman/commit/44
 <br>
 <br>
 
-## 3. <a id="example-3"></a>Calling local Composite Action ⚙️
+## 3. <a id="example-3"></a>Calling Composite Actions ⚙️
 
 [Composite actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
 are a specific type of workflow file which are designed to abstract out and reuse a set of instructions for one or more requesting workflows.
@@ -476,7 +476,7 @@ has been read into the dictionary under variable `$WORKFLOW_VARIABLE` which is a
 - name: Inspect Environment Variables
   run: env 
 ```
-[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5231724154?check_suite_focus=true)
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5231803339?check_suite_focus=true)
 ```shell
 echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
 env:
