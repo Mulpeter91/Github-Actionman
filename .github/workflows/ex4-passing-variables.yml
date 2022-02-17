@@ -10,7 +10,9 @@ on:
 jobs:
   create-variables:
     name: Creating and passing variables
-    runs-on: windows-latest 
+    runs-on: windows-latest
+    outputs:
+      dinner: ${{ steps.step_output.outputs.TONIGHTS_DINNER }}
     
     steps:
       #Example 4.1
@@ -42,9 +44,10 @@ jobs:
         run: env
         
       #Example 4.5
-      - name: Create variable output from step
+      - id: step_output
+        name: Create variable output from step
         run: |   
-          "::set-output name=SELECTED_COLOR::green" 
+          "::set-output name=TONIGHTS_DINNER::burrito" 
         
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
@@ -52,5 +55,6 @@ jobs:
     runs-on: windows-latest    
     
     steps:
-      - name: Inspect Environment Variables
-        run: env
+      #Example 4.5
+      - name: Print output variable from previous job
+        run: env {{ needs.create-variables.output.dinner }}
