@@ -57,7 +57,7 @@ jobs:
     steps:
       #Example 4.5
       - name: Reference output variable from previous job
-        run: Write-Host $Env:Dinner
+        run: env
         env:
           Dinner: ${{ needs.create-variables.output.dinner }}
           
