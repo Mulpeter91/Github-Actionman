@@ -1,4 +1,4 @@
-"`nThis will return a list of all open pull requests:"
+"This will return a list of all open pull requests:"
 $URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls"
 Write-Host $URI
 

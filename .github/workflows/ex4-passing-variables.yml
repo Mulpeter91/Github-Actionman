@@ -18,7 +18,7 @@ jobs:
       
       - name: Use print message composite action
         uses: ./.github/actions/print-message
-        with:                                                     # <- With keyword to signify parameters
+        with:                                                     # <- With keyword to signify parameters.
           message: "Cobra Kai never dies"                         # <- Named parameter in the called action.
           
       #Example 4.2
@@ -42,7 +42,7 @@ jobs:
         run: env 
 
   Obtain-Variables:
-    needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
+    needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
     name: Reading previous variables
     runs-on: windows-latest    
     

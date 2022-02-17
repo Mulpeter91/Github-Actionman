@@ -200,20 +200,20 @@ you some of the variables that will only populate during that event, such as `GI
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```yaml
-  #Example 2.2
-  Pull-Request-Variables:
-    name: Obtain variables useful to a pull request
-    runs-on: windows-latest
-    env:
-      var: nothing
-    steps:
-      - uses: actions/checkout@v2
+#Example 2.2
+Pull-Request-Variables:
+  name: Obtain variables useful to a pull request
+  runs-on: windows-latest
+  env:
+    var: nothing
+  steps:
+    - uses: actions/checkout@v2
 
-      - name: Print Variables for Pull Request     # <- Add a pipe key on the run command to make a multiple.
-        run: |
-          Write-Host "Actor: $Env:GITHUB_ACTOR"
-          Write-Host "Target Branch: $Env:GITHUB_BASE_REF"
-          Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
+    - name: Print Variables for Pull Request     # <- Add a pipe key on the run command to make a multiple.
+      run: |
+        Write-Host "Actor: $Env:GITHUB_ACTOR"
+        Write-Host "Target Branch: $Env:GITHUB_BASE_REF"
+        Write-Host "Source Branch: $Env:GITHUB_HEAD_REF"
 ```
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5198208204?check_suite_focus=true)
 ```shell
@@ -431,7 +431,6 @@ DOJO_1=Miyagi-Do Karate
 ```shell
 Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
   Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
-  shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
   env:
     DOJO_1: Miyagi-Do Karate
 ```
@@ -500,7 +499,7 @@ Work in Progress
 We previously noted that `jobs` are run concurrently by default and that variables are scoped to 
 the element they are defined in. The following example illustrates how you can enforce a dependency between jobs 
 to have them run consecutively to each other by using the `needs` array and pass a variable from the initial 
-job to the `dependent job` by using the `xxx` keyword.
+job to the `dependent job` using the `xxx` keyword rather than sending everything to the dictionary.
 
 [**Job 2 / Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
