@@ -47,7 +47,7 @@ jobs:
       - id: step_output
         name: Create variable output from step
         run: |   
-          echo "::set-output name=TONIGHTS_DINNER::burrito" 
+          Write-Host "::set-output name=TONIGHTS_DINNER::burrito" 
         
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
