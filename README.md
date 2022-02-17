@@ -608,3 +608,5 @@ The purpose of this article and these examples was to give you an introduction t
 and syntax in order to continue learning github actions with a clearer vision of the platform. 
 But this is just the tip of the iceberg. Github actions are capable of far more precise workflows
 with the use of more complex syntax.
+
+![Footer Banner](https://github.com/Mulpeter91/Github-Actionman/blob/main/ReadMeImages/Actions_Article_Footer.png)
