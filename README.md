@@ -469,6 +469,7 @@ has been read into the dictionary under variable `$WORKFLOW_VARIABLE` which is a
 - name: Set local step variable to environment variable
   run: |
     echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
+    echo "::set-output name=SELECTED_COLOR::green"
   env:
     LOCAL_VARIABLE: Karate Kid
 
