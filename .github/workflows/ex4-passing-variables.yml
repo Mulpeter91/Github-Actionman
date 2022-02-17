@@ -35,13 +35,17 @@ jobs:
       - name: Set local step variable to environment variable
         run: |
           echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
-          echo "::set-output name=SELECTED_COLOR::green"
         env:
           LOCAL_VARIABLE: Karate Kid
         
       - name: Inspect Environment Variables
-        run: env 
-
+        run: env
+        
+      #Example 4.5
+      - name: Create variable output from step
+        run: |   
+          "::set-output name=SELECTED_COLOR::green" 
+        
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
     name: Reading previous variables
