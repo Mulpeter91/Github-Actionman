@@ -492,10 +492,23 @@ Work in Progress
 
 ## 5. Web Requests
 
-Work in progress
+The below workflow demonstrates a series of simple web calls to the [Github Api](https://docs.github.com/en/rest/reference/pulls)
+`pulls` endpoint, which returns information  on pull requests. You can feed the response into a json object to access
+relevant data. The below `Invoke-WebRequest` calls will work because this repo is public. If private you will need to 
+[create](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) 
+an OAuth `Personal Access Token` to the header with `-Headers @{"Authorization"="Bearer <token>"}`. If the repository belongs to
+an organisation to which you are a member you will need authorize that created token to enable access via `configure SSO`.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex5-web-requests.yml)
 ```yaml
+name: 5 - Process Web Requests
+
+on:
+  pull_request:
+    branches: [
+        main
+    ]
+
 jobs:
   Obtain-Pull-Request-Data:
     name: Call Github API
@@ -510,27 +523,27 @@ jobs:
         run: ./Powershell/GithubWebRequests.ps1
 ```
 
-[**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/Variables.ps1)
+[**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubWebRequests.ps1)
 ```shell
-"`nThis will return a list of all open pull requests:"
+"This will return a list of all open pull requests:"
 $URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls`n"
 Write-Host $URI
 $RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
 Write-Host $RESPONSE
 
-"`n`nThis will return all pull requests of a specified state:"
+"This will return all pull requests of a specified state:"
 $URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls?state=$Env:PR_STATE`n"
 Write-Host $URI
 Write-Host "Access above link directly to read content."
 
-"`n`nThis will return a specific pull request:"
+"This will return a specific pull request:"
 $ID = $Env:GITHUB_REF_NAME -replace "/.*"
 $URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls/$ID`n"
 Write-Host $URI
 $RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
 Write-Host $RESPONSE
 
-"`n`nAccessing variables from the object: "
+"Accessing variables from the object: "
 $JSON_OBJECT = $RESPONSE | ConvertFrom-Json
 Write-Host "HTML URL:" $JSON_OBJECT.html_url
 Write-Host "TITLE:" $JSON_OBJECT.title
