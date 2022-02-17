@@ -23,6 +23,7 @@ your needs. The examples in this article are simple workflows created merely to 
 2. [Accessing environment variables](#example-2)
 3. [Calling local composite action](#example-3)
 4. [Setting & Passing Variables](#example-4)
+5. [Making Web Service Calls](#example-5)
 
 <br>
 <br>
@@ -538,7 +539,6 @@ jobs:
       - name: Call the Github /pulls endpoint
         run: ./Powershell/GithubWebRequests.ps1
 ```
-
 [**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubWebRequests.ps1)
 ```shell
 "This will return a list of all open pull requests:"
@@ -568,7 +568,6 @@ Write-Host "USER:" $JSON_OBJECT.user.login
 Write-Host "REQUESTED REVIEWERS:" $JSON_OBJECT.requested_reviewers
 Write-Host "MERGE_COMMIT_SHA:" $JSON_OBJECT.merge_commit_sha
 ```
-
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5229914260?check_suite_focus=true)
 ```shell
 This will return a list of all open pull requests:
@@ -589,11 +588,10 @@ REQUESTED REVIEWERS:
 MERGE_COMMIT_SHA: c48b23a4affe116482bb9b4d14aa88e921663792
 ```
 
-
 <br>
 <br>
 
-## Conclusion
+## <a id="example-5"></a>Conclusion
 
 The purpose of this article and these examples was to give you an introduction to basic concepts
 and syntax in order to continue learning github actions with a clearer vision of the platform. 
