@@ -468,7 +468,6 @@ the github environment dictionary.
 - name: Write local variables to environment variable dictionary
   run: |
     echo $Env:LOCAL_VARIABLE
-    echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
   env:
     LOCAL_VARIABLE: Karate Kid
 
