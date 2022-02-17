@@ -494,6 +494,49 @@ Work in Progress
 
 Work in progress
 
+[**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex5-web-requests.yml)
+```yaml
+jobs:
+  Obtain-Pull-Request-Data:
+    name: Call Github API
+    runs-on: windows-latest
+    env:
+      PR_STATE: closed      # <- query parameters to github are case sensitive
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Call the Github /pulls endpoint
+        run: ./Powershell/GithubWebRequests.ps1
+```
+
+[**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/Variables.ps1)
+```shell
+DOJO_2=Eagle Fang Karate
+DOJO_3=Cobra-Kai Karate
+```
+
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5229914260?check_suite_focus=true)
+```shell
+This will return a list of all open pull requests:
+https://api.github.com/repos/Mulpeter91/Github-Actionman/pulls
+
+This will return all pull requests of a specified state:
+https://api.github.com/repos/Mulpeter91/Github-Actionman/pulls?state=closed
+
+This will return a specific pull request:
+https://api.github.com/repos/Mulpeter91/Github-Actionman/pulls/19
+
+Accessing variables from the object: 
+HTML URL: https://github.com/Mulpeter91/Github-Actionman/pull/19
+TITLE: Test Title
+BODY: Test Body
+USER: Mulpeter91
+REQUESTED REVIEWERS: 
+MERGE_COMMIT_SHA: c48b23a4affe116482bb9b4d14aa88e921663792
+```
+
+
 <br>
 <br>
 
