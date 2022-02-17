@@ -47,7 +47,7 @@ jobs:
       - id: step_output
         name: Create variable output from step
         run: |   
-          echo "::set-output name=TONIGHTS_DINNER::burrito"
+          echo "::set-output name=TONIGHTS_DINNER::Burrito"
         
   Obtain-Variables:
     needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
@@ -57,7 +57,8 @@ jobs:
     steps:
       #Example 4.5
       - name: Inspect Environment Variables
-        run: env
+        run: |
+          Write-Host "Tonights dinner will be " $Env:Dinner
         env:
           Dinner: ${{ needs.create-variables.outputs.dinner }}
           
