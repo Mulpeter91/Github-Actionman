@@ -426,7 +426,6 @@ It is advised to keep all variable related files within the `.github` directory.
 ```shell
 DOJO_1=Miyagi-Do Karate
 ```
-
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
 ```shell
 Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
@@ -452,15 +451,32 @@ by executing a `powershell` script directly in the workflow step.
 DOJO_2=Eagle Fang Karate
 DOJO_3=Cobra-Kai Karate
 ```
-
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
 ```shell
 Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 ```
 
-### 4.4 Pass Variable to Dependant Job
+### 4.4 Set Variables from Local Step Variable 
 
+The below example takes a local environment variable declared in the step and reads it directly into
+the github environment dictionary.
+
+[**Job 1 / Step 4**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+```yaml
+#Example 4.4
+- name: Set local step variable to environment variable
+  run: |
+    echo "WORKFLOW_VARIABLE=$(echo ${LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
+  env:
+    LOCAL_VARIABLE: Karate Kid
+
+- name: Inspect Environment Variables
+  run: env
+```
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
+```shell
 Work in Progress
+```
 
 ### 4.5 Pass Variable to Dependant Job
 
