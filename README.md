@@ -465,9 +465,9 @@ the github environment dictionary.
 [**Job 1 / Step 4**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
 #Example 4.4
-- name: Set local step variable to environment variable
+- name: Write local variables to environment variable dictionary
   run: |
-    echo "WORKFLOW_VARIABLE=$(echo ${LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
+    echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
   env:
     LOCAL_VARIABLE: Karate Kid
 
@@ -542,24 +542,21 @@ jobs:
 [**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubWebRequests.ps1)
 ```shell
 "This will return a list of all open pull requests:"
-$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls`n"
+$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls"
+Write-Host $URI
+
+"`nThis will return all pull requests of a specified state:"
+$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls?state=$Env:PR_STATE"
+Write-Host $URI
+
+"`nThis will return a specific pull request:"
+$PR_NUMBER = $Env:GITHUB_REF_NAME -replace "/.*" # <- You can also get the PR number from the pull request event file.
+$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls/$PR_NUMBER"
 Write-Host $URI
 $RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
 Write-Host $RESPONSE
 
-"This will return all pull requests of a specified state:"
-$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls?state=$Env:PR_STATE`n"
-Write-Host $URI
-Write-Host "Access above link directly to read content."
-
-"This will return a specific pull request:"
-$ID = $Env:GITHUB_REF_NAME -replace "/.*"
-$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls/$ID`n"
-Write-Host $URI
-$RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
-Write-Host $RESPONSE
-
-"Accessing variables from the object: "
+"`nAccessing variables from the object: "
 $JSON_OBJECT = $RESPONSE | ConvertFrom-Json
 Write-Host "HTML URL:" $JSON_OBJECT.html_url
 Write-Host "TITLE:" $JSON_OBJECT.title
@@ -568,7 +565,7 @@ Write-Host "USER:" $JSON_OBJECT.user.login
 Write-Host "REQUESTED REVIEWERS:" $JSON_OBJECT.requested_reviewers
 Write-Host "MERGE_COMMIT_SHA:" $JSON_OBJECT.merge_commit_sha
 ```
-[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5229914260?check_suite_focus=true)
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5231450238?check_suite_focus=true)
 ```shell
 This will return a list of all open pull requests:
 https://api.github.com/repos/Mulpeter91/Github-Actionman/pulls
@@ -577,15 +574,15 @@ This will return all pull requests of a specified state:
 https://api.github.com/repos/Mulpeter91/Github-Actionman/pulls?state=closed
 
 This will return a specific pull request:
-https://api.github.com/repos/Mulpeter91/Github-Actionman/pulls/19
+https://api.github.com/repos/Mulpeter91/Github-Actionman/pulls/24
 
 Accessing variables from the object: 
-HTML URL: https://github.com/Mulpeter91/Github-Actionman/pull/19
+HTML URL: https://github.com/Mulpeter91/Github-Actionman/pull/24
 TITLE: Test Title
 BODY: Test Body
 USER: Mulpeter91
 REQUESTED REVIEWERS: 
-MERGE_COMMIT_SHA: c48b23a4affe116482bb9b4d14aa88e921663792
+MERGE_COMMIT_SHA: bd98939094bdb3d775966900ec43a126cf5fac80
 ```
 
 <br>
