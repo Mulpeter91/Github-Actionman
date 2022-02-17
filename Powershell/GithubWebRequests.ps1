@@ -7,11 +7,10 @@ Write-Host $RESPONSE
 "`n`nThis will return all pull requests of a specified state:"
 $URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls?state=$Env:PR_STATE`n"
 Write-Host $URI
-Write-Host "Access above link directly to read content."
 
 "`n`nThis will return a specific pull request:"
-$ID = $Env:GITHUB_REF_NAME -replace "/.*"
-$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls/$ID`n"
+$PR_NUMBER = $Env:GITHUB_REF_NAME -replace "/.*" # <- You can also get the PR number from the event file.
+$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls/$PR_NUMBER`n"
 Write-Host $URI
 $RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
 Write-Host $RESPONSE

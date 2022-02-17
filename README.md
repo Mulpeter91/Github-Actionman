@@ -512,8 +512,32 @@ jobs:
 
 [**Input File**](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/Variables.ps1)
 ```shell
-DOJO_2=Eagle Fang Karate
-DOJO_3=Cobra-Kai Karate
+"`nThis will return a list of all open pull requests:"
+$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls`n"
+Write-Host $URI
+$RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
+Write-Host $RESPONSE
+
+"`n`nThis will return all pull requests of a specified state:"
+$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls?state=$Env:PR_STATE`n"
+Write-Host $URI
+Write-Host "Access above link directly to read content."
+
+"`n`nThis will return a specific pull request:"
+$ID = $Env:GITHUB_REF_NAME -replace "/.*"
+$URI = "https://api.github.com/repos/$Env:GITHUB_REPOSITORY/pulls/$ID`n"
+Write-Host $URI
+$RESPONSE = Invoke-WebRequest -Uri $URI -Method Get -TimeoutSec 480
+Write-Host $RESPONSE
+
+"`n`nAccessing variables from the object: "
+$JSON_OBJECT = $RESPONSE | ConvertFrom-Json
+Write-Host "HTML URL:" $JSON_OBJECT.html_url
+Write-Host "TITLE:" $JSON_OBJECT.title
+Write-Host "BODY:" $JSON_OBJECT.body
+Write-Host "USER:" $JSON_OBJECT.user.login
+Write-Host "REQUESTED REVIEWERS:" $JSON_OBJECT.requested_reviewers
+Write-Host "MERGE_COMMIT_SHA:" $JSON_OBJECT.merge_commit_sha
 ```
 
 [**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5229914260?check_suite_focus=true)
