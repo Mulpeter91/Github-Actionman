@@ -460,24 +460,37 @@ Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 ### 4.4 Set Variables from Local Step Variable 
 
 The below example takes a local environment variable declared in the step and reads it directly into
-the github environment dictionary.
+the github environment dictionary. Note from the below console output, that the variable `$LOCAL_VARIABLE`
+has been read into the dictionary under variable `$WORKFLOW_VARIABLE` which is accessable in the subsequent
+`Inspect Environment Variables` step.
 
 [**Job 1 / Step 4**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
 #Example 4.4
-- name: Write local variables to environment variable dictionary
+- name: Set local step variable to environment variable
   run: |
-    echo $LOCAL_VARIABLE
     echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
   env:
     LOCAL_VARIABLE: Karate Kid
 
 - name: Inspect Environment Variables
-  run: env
+  run: env 
 ```
-[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5231724154?check_suite_focus=true)
 ```shell
-Work in Progress
+echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
+env:
+  DOJO_1: Miyagi-Do Karate
+  DOJO_2: Eagle Fang Karate
+  DOJO_3: Cobra-Kai Karate
+  LOCAL_VARIABLE: Karate Kid
+  
+Run env
+env:
+  DOJO_1: Miyagi-Do Karate
+  DOJO_2: Eagle Fang Karate
+  DOJO_3: Cobra-Kai Karate
+  WORKFLOW_VARIABLE: Karate Kid
 ```
 
 ### 4.5 Pass Variable to Dependant Job
