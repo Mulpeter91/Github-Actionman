@@ -12,7 +12,7 @@ jobs:
     name: Creating and passing variables
     runs-on: windows-latest
     outputs:
-      dinner: ${{ steps.step_output.outputs.TONIGHTS_DINNER }}
+      output1: ${{ steps.step_output.outputs.TONIGHTS_DINNER }}
     
     steps:
       #Example 4.1
@@ -56,9 +56,9 @@ jobs:
     
     steps:
       #Example 4.5
-      - name: Inspect Environment Variables
+      - name: Print output variable
         run: |
-          Write-Host "Tonights dinner will be " $Env:Dinner
+          Write-Host "Tonights dinner will be" $Env:Dinner
         env:
-          Dinner: ${{ needs.create-variables.outputs.dinner }}
+          Dinner: ${{ needs.create-variables.outputs.output1 }}
           

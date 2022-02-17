@@ -339,7 +339,7 @@ the added fun of setting variables from outside the `yml` file and passing varia
 In the below example we are using a `composite action` much like example 3 but with `input` parameters. 
 The `step` passing these named parameters to the action with the `with` keyword and `<variable>` name, in this case 'message'.
 
-[**Job 1 / Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+[**Job 1 / Example 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
 jobs:
   Create-Variables:
@@ -391,7 +391,7 @@ Cobra Kai never dies 🤟🏻
 The following example combines a parameterised composite action with reading the contents of an 
 `.env` file into the environment variables for access by the workflow.
 
-[**Job 1 / Step 2**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+[**Job 1 / Example 2**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
 #Example 4.2
 - name: Set variables from environment file
@@ -440,7 +440,7 @@ Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 The following example achieves the same outcome of example 4.2 but adds environment variables
 by executing a `powershell` script directly in the workflow step.
 
-[**Job 1 / Step 3**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+[**Job 1 / Example 3**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
 #Example 4.3
 - name: Set variables from powershell file
@@ -463,13 +463,12 @@ the github environment dictionary. Note from the below console output, that the 
 has been read into the dictionary under variable `$WORKFLOW_VARIABLE` which is accessable in the subsequent
 `Inspect Environment Variables` step.
 
-[**Job 1 / Step 4**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+[**Job 1 / Example 4**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
 #Example 4.4
 - name: Set local step variable to environment variable
   run: |
     echo "WORKFLOW_VARIABLE=$(echo ${Env:LOCAL_VARIABLE})" >> $Env:GITHUB_ENV
-    echo "::set-output name=SELECTED_COLOR::green"
   env:
     LOCAL_VARIABLE: Karate Kid
 
@@ -495,27 +494,53 @@ env:
 
 ### 4.5 Pass Variable to Dependant Job
 
-Work in Progress
-
 We previously noted that `jobs` are run concurrently by default and that variables are scoped to 
 the element they are defined in. The following example illustrates how you can enforce a dependency between jobs 
 to have them run consecutively to each other by using the `needs` array and pass a variable from the initial 
-job to the `dependent job` using the `xxx` keyword rather than sending everything to the dictionary.
+job to the `dependent job` using the `outputs` keyword rather than sending everything to the high level environment 
+dictionary.
 
-[**Job 2 / Step 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+The below step is extracted from the first job `create-variables` and uses the `outputs` keyword with an object reference
+to step `step_output`. This step in turn uses the `::set-ouput name=NAME::Value` command to set the outputted variable.
+
+[**Job 1 / Example 5**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
+```yaml
+jobs:
+  create-variables:
+    name: Creating and passing variables
+    runs-on: windows-latest
+    outputs:
+      output1: ${{ steps.step_output.outputs.TONIGHTS_DINNER }}
+
+    #Example 4.5
+    - id: step_output
+      name: Create variable output from step
+      run: |
+        echo "::set-output name=TONIGHTS_DINNER::Burrito"
+```
+The next step which is in the subsequent `Obtain-Variables` job then uses the `needs` keyword to wait for the referenced job 
+to complete. The step then references the outputted variable and assigns it to the internal `Dinner` variable.
+
+[**Job 2 / Example 5**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
 Obtain-Variables:
-  needs: [Create-Variables]       # <- Jobs run concurrently by default. The 'needs' keyword sets dependant jobs.
+  needs: [Create-Variables]       # <- Jobs run concurrently by default. Over this with the 'needs' keyword to set dependents.
   name: Reading previous variables
   runs-on: windows-latest
 
   steps:
-    - name: Inspect Environment Variables
-      run: env
+    #Example 4.5
+    - name: Print output variable
+      run: |
+        Write-Host "Tonights dinner will be " $Env:Dinner
+      env:
+        Dinner: ${{ needs.create-variables.outputs.dinner }}
 ```
-[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5173627256?check_suite_focus=true)
+
+[**Console Output**](https://github.com/Mulpeter91/Github-Actionman/runs/5235670515?check_suite_focus=true)
 ```shell
-Work in Progress
+Run Write-Host "Tonights dinner will be" $Env:Dinner
+Tonights dinner will be Burrito
 ```
 
 <br>
