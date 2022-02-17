@@ -2,22 +2,15 @@
 
 # Getting Started with Github Action Workflows
 
-This article gives a brief introduction to the concepts and syntax of github actions. While the 
-[official documentation](https://docs.github.com/en/actions) of github actions is comprehensive, the aim of this article is to help avoid those early learning mistakes.
+This article gives a brief introduction to the concepts and syntax of github actions. While the [official documentation](https://docs.github.com/en/actions) of github actions is comprehensive, the aim of this article is to help avoid those early learning mistakes.
 
 ## Context 👨🏼‍🏫
 
-Github actions is a platform to automate developer workflows. It was built to reduce the organisational 
-burden attached to large open-source community driven repositories. This burden would manifest in the form 
-of hundreds, if not thousands, of contributors, branches, pull requests, merges as well as testing, labelling,
-creating release documentation and many other tasks or events.
+Github actions is a platform to automate developer workflows. It was built to reduce the organisational burden attached to large open-source community driven repositories. This burden would manifest in the form of hundreds, if not thousands, of contributors, branches, pull requests, merges as well as testing, labelling, creating release documentation and many other tasks or events.
 
-The purpose of an action is to listen to these events and trigger a workflow in response. For example, if a contributor raises an issue, you
-may want to sort it, label it, and assign it automatically. A workflow is a `.yml` or `.yaml` file with a set of 
-instructions you define.
+The purpose of an action is to listen to these events and trigger a workflow in response. For example, if a contributor raises an issue, you may want to sort it, label it, and assign it automatically. A workflow is a `.yml` or `.yaml` file with a set of instructions you define.
 
-While CI/CD is often used to convey its utility, it is just one of many possible workflows you can create to serve
-your needs. The examples in this article are simple workflows created merely to introduce some of the basic concepts.
+While CI/CD is often used to convey its utility, it is just one of many possible workflows you can create to serve your needs. The examples in this article are simple workflows created merely to introduce some of the basic concepts.
 
 1. [Executing Shell Commands](#example-1)
 2. [Accessing Environment Variables](#example-2)
@@ -30,21 +23,13 @@ your needs. The examples in this article are simple workflows created merely to 
 
 ## 1. <a id="example-1"></a>Executing Shell Commands 🐚
 
-The first example below is a very basic workflow executing different commands in their native shells. The point of this example 
-is to illustrate the role of the `run-on` and `shell` instructions. A workflow refers to all the instructions within the file, 
-which is comprised of one or more `jobs`, which in turn is comprised of one or more `steps`.
+The first example below is a very basic workflow executing different commands in their native shells. The point of this example is to illustrate the role of the `run-on` and `shell` instructions. A workflow refers to all the instructions within the file, which is comprised of one or more `jobs`, which in turn is comprised of one or more `steps`.
 
-Each `job` listed within a workflow is executed concurrently on a different github server, but you can choose to host them yourself.
-The significance of this means you need to specify which operating system you want your `job` to run on by using the `run-on` keyword.
-This can include various versions of windows, macOS, ubuntu or even being self-hosted.
+Each `job` listed within a workflow is executed concurrently on a different github server, but you can choose to host them yourself. The significance of this means you need to specify which operating system you want your `job` to run on by using the `run-on` keyword. This can include various versions of windows, macOS, ubuntu or even being self-hosted.
 
-If for example all your steps within a job run powershell commands or scripts, you could specify `run-on: windows-latest` and call it job done as
-powershell would be understood by the runners of that operating system. But let's say you needed to run a one off Zshell script in the same job, here the `shell`
-keyword can allow you to override the shell of the specified OS by specifying the correct shell language.
+If for example all your steps within a job run powershell commands or scripts, you could specify `run-on: windows-latest` and call it job done as powershell would be understood by the runners of that operating system. But let's say you needed to run a one off Zshell script in the same job, here the `shell` keyword can allow you to override the shell of the specified OS by specifying the correct shell language.
 
-Below is an example of 'Hello World' being printed to the console in `powershell`, `bash`, `zshell` and even `python` , which are all being 
-run on a `windows` github server. Github also accepts `powershell`, `pwsh` (powershell core) and `cmd` when overriding for Windows commands.
-See the code example for more useful information in the comments and follow all links to source file.
+Below is an example of 'Hello World' being printed to the console in `powershell`, `bash`, `zshell` and even `python` , which are all being run on a `windows` github server. Github also accepts `powershell`, `pwsh` (powershell core) and `cmd` when overriding for Windows commands. See the code example for more useful information in the comments and follow all links to source file.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex1-execute-scripts.yml)
 ```yaml
@@ -100,20 +85,13 @@ Hello World from Python!
 
 ## 2. <a id="example-2"></a>Accessing Environment Variables 🌱
 
-The following example illustrates how you can read `environment variables`. There are two kinds of variables, 
-those provided by github which use protected names and can be found in the [documentation](https://docs.github.com/en/actions/learn-github-actions/environment-variables),
-and custom variables you can set yourself throughout your workflow.
+The following example illustrates how you can read `environment variables`. There are two kinds of variables, those provided by github which use protected names and can be found in the [documentation](https://docs.github.com/en/actions/learn-github-actions/environment-variables), and custom variables you can set yourself throughout your workflow.
 
-Another significant feature of the `workflow`, `job` and `step` relationship is how custom variables are scoped. 
-Declared variables within the workflow using the keyword `env` follow an access hierarchy and can only be accessed within the element they were defined. Those variables declared at the highest
-`workflow` level can be accessed by all `jobs` and `steps`. Variables declared within a `job` can only be used by steps within that job and if
-declared inside a `step` they can only be used by that step.
+Another significant feature of the `workflow`, `job` and `step` relationship is how custom variables are scoped. Declared variables within the workflow using the keyword `env` follow an access hierarchy and can only be accessed within the element they were defined. Those variables declared at the highest `workflow` level can be accessed by all `jobs` and `steps`. Variables declared within a `job` can only be used by steps within that job and if declared inside a `step` they can only be used by that step.
 
 ### 2.1 Custom & Protected Environment Variables
 
-In the below workflow example you can see that 3 custom variables are declared at different levels: 
-`BEST_PINT`, `BEST_WHISKEY` and `BEST_COCKTAIL`. In the `Print Variables to Script` step a [script](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubEnvVariables.ps1) 
-is executed to print these variables to the console along with a sample of various set github environment variables.
+In the below workflow example you can see that 3 custom variables are declared at different levels: `BEST_PINT`, `BEST_WHISKEY` and `BEST_COCKTAIL`. In the `Print Variables to Script` step a [script](https://github.com/Mulpeter91/Github-Actionman/blob/main/Powershell/GithubEnvVariables.ps1) is executed to print these variables to the console along with a sample of various set github environment variables.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```yaml
@@ -189,14 +167,11 @@ ChocolateyInstall=C:\ProgramData\chocolatey
 ...
 ```
 
-You must remember to use the correct syntax for referencing variables in your target shell. For example, Windows runners would required the format `$env:NAME`
-while the Linux runners using bash shell would use `$NAME`.
+You must remember to use the correct syntax for referencing variables in your target shell. For example, Windows runners would required the format `$env:NAME` while the Linux runners using bash shell would use `$NAME`.
 
 ### 2.2 Specific Event Variables
 
-Most github environment variables will always populate, such as `GITHUB_ACTOR` but some will only be populated during a specific event trigger. In the above
-`workflow` example you can see a trigger has been added for `pull_request`. This has been added to show
-you some of the variables that will only populate during that event, such as `GITHUB_BASE_REF` and `GITHUB_HEAD_REF`.
+Most github environment variables will always populate, such as `GITHUB_ACTOR` but some will only be populated during a specific event trigger. In the above `workflow` example you can see a trigger has been added for `pull_request`. This has been added to show you some of the variables that will only populate during that event, such as `GITHUB_BASE_REF` and `GITHUB_HEAD_REF`.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```yaml
@@ -224,12 +199,9 @@ Source Branch: pull-request-ex
 
 ### 2.3 Accessing Event Metadata
 
-Another variable worth noting and is heavily effected by the action event type is `GITHUB_EVENT_PATH`. This variable contains the directory 
-within your runner to a temporarily stored `event.json` file. This file contains substantial metadata regarding the specific event triggered 
-within the workflow and can be fed into a json object for easy access to specific data nodes.
+Another variable worth noting and is heavily effected by the action event type is `GITHUB_EVENT_PATH`. This variable contains the directory within your runner to a temporarily stored `event.json` file. This file contains substantial metadata regarding the specific event triggered within the workflow and can be fed into a json object for easy access to specific data nodes.
 
-Every event type has it's own structured version of the file. So what exists in a `pull_request`:`event.json` will not exactly match the
-nodes in a `push`:`event.json`.
+Every event type has it's own structured version of the file. So what exists in a `pull_request`:`event.json` will not exactly match the nodes in a `push`:`event.json`.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex2-access-variables.yml)
 ```yaml
@@ -264,16 +236,11 @@ OBJECT.head_commit.url: https://github.com/Mulpeter91/Github-Actionman/commit/44
 
 ## 3. <a id="example-3"></a>Calling Composite Actions ⚙️
 
-[Composite actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
-are a specific type of workflow file which are designed to abstract out and reuse a set of instructions for one or more requesting workflows.
-They are typically stored in their own repositories, such as [Github's own shared actions](https://github.com/actions) 
-or [Google's integration actions](https://github.com/google-github-actions), but they can also be stored and executed in the same repository.
+[Composite actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) are a specific type of workflow file which are designed to abstract out and reuse a set of instructions for one or more requesting workflows. They are typically stored in their own repositories, such as [Github's own shared actions](https://github.com/actions) or [Google's integration actions](https://github.com/google-github-actions), but they can also be stored and executed in the same repository.
 
-A step utilises the `uses` keyword when executing a `composite action`. In the below example you will notice two steps
-each using a composite action. The first is using github's shared `actions/checkout@v2` and the other is using our local `composite action`.
+A step utilises the `uses` keyword when executing a `composite action`. In the below example you will notice two steps each using a composite action. The first is using github's shared `actions/checkout@v2` and the other is using our local `composite action`.
 
-Composite actions depend on targeted releases to know which version of the code to execute. In the case of `checkout@v2` this is referencing release `v2`
-in the `checkout` repository. You need to checkout your code in order to build it, test it or in our case execute composite actions.
+Composite actions depend on targeted releases to know which version of the code to execute. In the case of `checkout@v2` this is referencing release `v2` in the `checkout` repository. You need to checkout your code in order to build it, test it or in our case execute composite actions.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex3-composite-action.yml)
 ```yaml
@@ -298,8 +265,7 @@ jobs:
         uses: ./.github/actions/hello-world       # <- Use keyword for calling other actions
 ```
 
-The `composite action` file requires a `name` and `description` field with an optional `author` field.
-The run also needs to add `using: 'composite'` before executing its steps.
+The `composite action` file requires a `name` and `description` field with an optional `author` field. The run also needs to add `using: 'composite'` before executing its steps.
 
 [**Composite Action**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/actions/hello-world/action.yml)
 ```yaml
@@ -320,24 +286,18 @@ Run Write-Host "Hello World from Composite Action!"
 Hello World from Composite Action!
 ```
 
-Another important point regarding `composite actions` is that they must be defined inside a file called either
-`action.yml` or `action.yaml`. It is recommended that if you have multiple composite actions in the same repo
-that you house them in their own directories within the `.github` directory. While these directories can contain other
-files such as docker files, they must contain **one** `action` file. See working [repo](https://github.com/Mulpeter91/Github-Actionman/tree/main/.github/actions)
-for an example.
+Another important point regarding `composite actions` is that they must be defined inside a file called either `action.yml` or `action.yaml`. It is recommended that if you have multiple composite actions in the same repo that you house them in their own directories within the `.github` directory. While these directories can contain other files such as docker files, they must contain **one** `action` file. See working [repo](https://github.com/Mulpeter91/Github-Actionman/tree/main/.github/actions) for an example.
 
 <br>
 <br>
 
 ## 4. <a id="example-4"></a>Setting and Passing Variables 🤾
 
-The below `step` examples are all run on the same `workflow` file and combine parts of the previous code with
-the added fun of setting variables from outside the `yml` file and passing variables around the workflow.
+The below `step` examples are all run on the same `workflow` file and combine parts of the previous code with the added fun of setting variables from outside the `yml` file and passing variables around the workflow.
 
 ### 4.1 Passing Parameters to Composite Action
 
-In the below example we are using a `composite action` much like example 3 but with `input` parameters. 
-The `step` passing these named parameters to the action with the `with` keyword and `<variable>` name, in this case 'message'.
+In the below example we are using a `composite action` much like example 3 but with `input` parameters. The `step` passing these named parameters to the action with the `with` keyword and `<variable>` name, in this case 'message'.
 
 [**Job 1 / Example 1**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -355,8 +315,7 @@ jobs:
         with:                                 # <- With keyword to signify parameters
           message: "Cobra Kai never dies"     # <- Named parameter in the called action.
 ```
-The composite action lists its parameters with the `inputs` keyword. Parameters can be `required: true` or `false`, include
-a `description` and a `default` value if no value is passed. In our case, a `message` value is sent but a `version` value is not.
+The composite action lists its parameters with the `inputs` keyword. Parameters can be `required: true` or `false`, include a `description` and a `default` value if no value is passed. In our case, a `message` value is sent but a `version` value is not.
 
 [**Composite Action**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/actions/print-message/action.yml)
 ```yaml
@@ -388,8 +347,7 @@ Cobra Kai never dies 🤟🏻
 
 ### 4.2 Set Variables from Environment File
 
-The following example combines a parameterised composite action with reading the contents of an 
-`.env` file into the environment variables for access by the workflow.
+The following example combines a parameterised composite action with reading the contents of an `.env` file into the environment variables for access by the workflow.
 
 [**Job 1 / Example 2**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -437,8 +395,7 @@ Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 
 ### 4.3 Set Variables from Powershell File
 
-The following example achieves the same outcome of example 4.2 but adds environment variables
-by executing a `powershell` script directly in the workflow step.
+The following example achieves the same outcome of example 4.2 but adds environment variables by executing a `powershell` script directly in the workflow step.
 
 [**Job 1 / Example 3**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -458,10 +415,7 @@ Run Get-Content ./Powershell/Variables.ps1 >> $Env:GITHUB_ENV
 
 ### 4.4 Set Variables from Local Step Variable 
 
-The below example takes a local environment variable declared in the step and reads it directly into
-the github environment dictionary. Note from the below console output, that the variable `$LOCAL_VARIABLE`
-has been read into the dictionary under variable `$WORKFLOW_VARIABLE` which is accessable in the subsequent
-`Inspect Environment Variables` step.
+The below example takes a local environment variable declared in the step and reads it directly into the github environment dictionary. Note from the below console output, that the variable `$LOCAL_VARIABLE` has been read into the dictionary under variable `$WORKFLOW_VARIABLE` which is accessible in the subsequent `Inspect Environment Variables` step.
 
 [**Job 1 / Example 4**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -494,14 +448,9 @@ env:
 
 ### 4.5 Pass Variable to Dependant Job
 
-We previously noted that `jobs` are run concurrently by default and that variables are scoped to 
-the element they are defined in. The following example illustrates how you can enforce a dependency between jobs 
-to have them run consecutively to each other by using the `needs` array and pass a variable from the initial 
-job to the `dependent job` using the `outputs` keyword rather than sending everything to the high level environment 
-dictionary.
+We previously noted that `jobs` are run concurrently by default and that variables are scoped to the element they are defined in. The following example illustrates how you can enforce a dependency between jobs to have them run consecutively to each other by using the `needs` array and pass a variable from the initial job to the `dependent job` using the `outputs` keyword rather than sending everything to the high level environment dictionary.
 
-The below step is extracted from the first job `create-variables` and uses the `outputs` keyword with an object reference
-to step `step_output`. This step in turn uses the `::set-ouput name=NAME::Value` command to set the outputted variable.
+The below step is extracted from the first job `create-variables` and uses the `outputs` keyword with an object reference to step `step_output`. This step in turn uses the `::set-ouput name=NAME::Value` command to set the outputted variable.
 
 [**Job 1 / Example 5**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -518,8 +467,7 @@ jobs:
       run: |
         echo "::set-output name=TONIGHTS_DINNER::Burrito"
 ```
-The next step which is in the subsequent `Obtain-Variables` job then uses the `needs` keyword to wait for the referenced job 
-to complete. The step then references the outputted variable and assigns it to the internal `Dinner` variable.
+The next step which is in the subsequent `Obtain-Variables` job then uses the `needs` keyword to wait for the referenced job to complete. The step then references the outputted variable and assigns it to the internal `Dinner` variable.
 
 [**Job 2 / Example 5**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex4-passing-variables.yml)
 ```yaml
@@ -548,12 +496,7 @@ Tonights dinner will be Burrito
 
 ## 5. Web Requests
 
-The below workflow demonstrates a series of simple web calls to the [Github Api](https://docs.github.com/en/rest/reference/pulls)
-`pulls` endpoint, which returns information  on pull requests. You can feed the response into a json object to access
-relevant data. The below `Invoke-WebRequest` calls will work because this repo is public. If private you will need to 
-[create](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) 
-an OAuth `Personal Access Token` to the header with `-Headers @{"Authorization"="Bearer <token>"}`. If the repository belongs to
-an organisation to which you are a member you will need authorize that created token to enable access via `configure SSO`.
+The below workflow demonstrates a series of simple web calls to the [Github Api](https://docs.github.com/en/rest/reference/pulls) `pulls` endpoint, which returns information  on pull requests. You can feed the response into a json object to access relevant data. The below `Invoke-WebRequest` calls will work because this repo is public. If private you will need to [create](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) an OAuth `Personal Access Token` to the header with `-Headers @{"Authorization"="Bearer <token>"}`. If the repository belongs to an organisation to which you are a member you will need authorize that created token to enable access via `configure SSO`.
 
 [**Workflow**](https://github.com/Mulpeter91/Github-Actionman/blob/main/.github/workflows/ex5-web-requests.yml)
 ```yaml
@@ -629,9 +572,6 @@ MERGE_COMMIT_SHA: bd98939094bdb3d775966900ec43a126cf5fac80
 
 ## <a id="example-5"></a>Conclusion
 
-The purpose of this article and these examples was to give you an introduction to basic concepts
-and syntax in order to continue learning github actions with a clearer vision of the platform. 
-But this is just the tip of the iceberg. Github actions are capable of far more precise workflows
-with the use of more complex syntax.
+The purpose of this article and these examples was to give you an introduction to basic concepts and syntax in order to continue learning github actions with a clearer vision of the platform. But this is just the tip of the iceberg. Github actions are capable of far more precise workflows with the use of more complex syntax.
 
 ![Footer Banner](https://github.com/Mulpeter91/Github-Actionman/blob/main/ReadMeImages/Actions_Article_Footer.png)
